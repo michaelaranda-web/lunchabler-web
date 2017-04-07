@@ -6,9 +6,20 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/ GET Hello World page. /
+/* GET Hello World page. */
 router.get('/helloworld', function(req, res) {
   res.render('helloworld', { title: 'Welcome to my Node.js/Express App' });
+});
+
+/* Get User list page */
+router.get('/userlist', function(req, res) {
+  var db = req.db;
+  var collection = db.get('usercollection');
+  collection.find({}, {}, function(e, docs) {
+    res.render('userlist', {
+      "userlist" : docs
+    });
+  });
 });
 
 module.exports = router;
