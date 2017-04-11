@@ -3,12 +3,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Lunchabler' });
 });
 
 /* GET Hello World page. */
-router.get('/helloworld', function(req, res) {
-  res.render('helloworld', { title: 'Welcome to my Node.js/Express App' });
+router.get('/search', function(req, res) {
+  var db = req.db;
+  var collection = db.get('restaurants');
+  collection.find().then(function(doc) {
+    res.render('search', { restaurants: doc });
+  });
 });
 
 /* GET User list page */
