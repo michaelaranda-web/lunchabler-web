@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon server.js"
+    "build": "babel ./bin/www -d dist",
+    "dev": "nodemon ./bin/www --exec babel-node",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.16.0app",
@@ -18,6 +19,9 @@
     "serve-favicon": "~2.3.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "nodemon": "^1.11.0"
   }
 }
