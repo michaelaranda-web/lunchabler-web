@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "babel ./bin/www -d dist",
+    "build": "babel ./public/javascripts/app.js -o dist/javascripts/app.js && babel ./routes -d dist/javascripts/routes",
     "dev": "nodemon ./bin/www --exec babel-node",
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "babel": "^6.23.0",
     "body-parser": "~1.16.0app",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
