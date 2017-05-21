@@ -5,8 +5,7 @@
   "scripts": {
     "build": "webpack",
     "dev": "nodemon ./bin/www --exec babel-node",
-    "heroku-prebuild": "echo ******* Heroku Prebuild *******",
-    "heroku-postbuild": "echo ******* Heroku Postbuild *******",
+    "heroku-prebuild": "webpack",
     "start": "node ./bin/www"
   },
   "dependencies": {
