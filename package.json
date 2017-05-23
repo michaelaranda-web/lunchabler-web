@@ -8,6 +8,7 @@
     "clean": "rm -rf build && mkdir build && rm -rf dist && mkdir dist",
     "dev": "nodemon ./bin/www --exec babel-node",
     "heroku-prebuild": "npm run build",
+    "postinstall": "npm install",
     "start": "node ./bin/www"
   },
   "dependencies": {
