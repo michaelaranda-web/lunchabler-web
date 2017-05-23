@@ -7,7 +7,7 @@
     "build-server": "./node_modules/.bin/babel -d ./build ./server -s",
     "clean": "rm -rf build && mkdir build && rm -rf dist && mkdir dist",
     "dev": "nodemon ./bin/www --exec babel-node",
-    "heroku-prebuild": "npm run build",
+    "heroku-postbuild": "npm run build",
     "postinstall": "cd client && npm install",
     "start": "node ./bin/www"
   },
