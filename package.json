@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "npm run clean && npm run build-server && webpack",
-    "build-server": "./node_modules/.bin/babel -d ./build ./server -s",
+    "build-server": "babel -d ./build ./server -s",
     "clean": "rm -rf build && mkdir build && rm -rf dist && mkdir dist",
     "dev": "nodemon ./bin/www --exec babel-node",
     "heroku-postbuild": "npm run build",
