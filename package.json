@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run clean && webpack && npm run build-server",
+    "build": "npm run clean && npm run build-server && webpack",
     "build-server": "babel -d ./build ./server -s",
     "clean": "rm -rf build && mkdir build && rm -rf dist && mkdir dist",
     "dev": "nodemon ./bin/www --exec babel-node",
