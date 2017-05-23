@@ -9,3 +9,4 @@ router.get('/', function (req, res, next) {
 });
 
 module.exports = router;
+//# sourceMappingURL=users.js.map
