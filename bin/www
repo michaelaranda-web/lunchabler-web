@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
 
-var app = require('../build/app');
+var app = require('../build/server.js');
 var debug = require('debug')('lunchabler:server');
 var http = require('http');
 

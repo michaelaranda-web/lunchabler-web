@@ -4,8 +4,11 @@ const APP_DIR = path.resolve(__dirname, 'app');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 
 module.exports = {
-  entry: APP_DIR + '/assets/javascripts/test.jsx',
-  output: { path: BUILD_DIR + '/javascripts/', filename: 'bundle.js' },
+  entry: APP_DIR + '/assets/javascripts/index.jsx',
+  output: {
+    path: BUILD_DIR + '/javascripts/',
+    filename: 'bundle.js'
+  },
   module: {
     loaders: [
       {
@@ -17,5 +20,5 @@ module.exports = {
         }
       }
     ]
-  },
+  }
 };

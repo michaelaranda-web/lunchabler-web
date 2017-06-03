@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run clean && npm run build-server && webpack",
-    "build-server": "babel -d ./build ./server -s",
+    "build": "npm run clean && webpack --config ./webpack.config.client.js && cp -r ./app/assets/stylesheets/ ./dist/stylesheets && npm run build-server",
+    "build-server": "babel -d ./build ./server -s && webpack --config ./webpack.config.server.js",
     "clean": "rm -rf build && mkdir build && rm -rf dist && mkdir dist",
     "dev": "nodemon ./bin/www --exec babel-node",
     "heroku-postbuild": "npm run build",
-    "start": "node ./bin/www"
+    "start": "node ./build/server.js"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -19,6 +19,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "~1.16.0app",
     "cookie-parser": "~1.4.3",
+    "css-loader": "^0.28.4",
     "debug": "~2.6.0",
     "express": "~4.14.1",
     "jade": "~1.11.0",
@@ -27,8 +28,13 @@
     "morgan": "~1.7.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "sass-loader": "^6.0.5",
     "serve-favicon": "~2.3.2",
-    "webpack": "^2.5.1"
+    "style-loader": "^0.18.1",
+    "webpack": "^2.5.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
