@@ -4,13 +4,12 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import mongo from 'mongodb';
 import monk from 'monk';
 
-import { StaticRouter, matchPath } from 'react-router';
+import { matchPath } from 'react-router';
 import React from 'react';
-import render from './render.js';
-import { App } from '../shared/app.jsx';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { SSRComponent } from './SSRComponent';
 
 let db_url = (process.env.NODE_ENV == 'production') ? process.env.MONGODB_URI : 'localhost:27017/lunchabler';
 let db = monk(db_url);
@@ -39,19 +38,13 @@ app.get('*', (req, res) => {
     return;
   }
 
-  res.status(200).send(render(
-    (
-      <StaticRouter context={{}} location={req.url}>
-        <App />
-      </StaticRouter>
-    )
-  ));
-});
-
-// Make our db accessible to our router
-app.use((req,res,next) => {
-  req.db = db;
-  next();
+  db.get("restaurants").find().then((restaurants) => {
+    res.status(200).send(renderToStaticMarkup(
+      <SSRComponent location={req.url} restaurants={restaurants} />
+    ));
+  }).catch((e) => {
+    console.log(e);
+  });
 });
 
 module.exports = app;
