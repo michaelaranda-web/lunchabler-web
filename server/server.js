@@ -8,6 +8,9 @@ import monk from 'monk';
 
 import { matchPath } from 'react-router';
 import React from 'react';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { tempReducer } from '../shared/reducers/combinedReducers';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { SSRComponent } from './SSRComponent';
 
@@ -40,8 +43,14 @@ app.get('*', (req, res) => {
   }
 
   db.get("restaurants").find().then((restaurants) => {
+    let store = createStore(tempReducer, { restaurants });
+
     res.status(200).send(renderToStaticMarkup(
-      <SSRComponent location={req.url} restaurants={restaurants} />
+      <Provider store={store} >
+        <SSRComponent location={req.url}
+                      preloadedState={store.getState()}
+                      restaurants={restaurants} />
+      </Provider>
     ));
   }).catch((e) => {
     console.log(e);
