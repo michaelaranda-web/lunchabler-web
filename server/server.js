@@ -27,7 +27,8 @@ app.use(cookieParser());
 
 const routes = [
   '/',
-  '/search'
+  '/search',
+  '/control'
 ];
 
 app.get('*', (req, res) => {
@@ -44,6 +45,20 @@ app.get('*', (req, res) => {
     ));
   }).catch((e) => {
     console.log(e);
+  });
+});
+
+app.post('/add_user', (req, res) => {
+  let user = {
+    name: req.body.name
+  };
+
+  db.collection('users').insert(user, (err) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log("[Server] Added Name: " + req.body.name);
+    res.send(req.body);
   });
 });
 
