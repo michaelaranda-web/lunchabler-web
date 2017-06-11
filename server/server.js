@@ -8,9 +8,10 @@ import monk from 'monk';
 
 import { matchPath } from 'react-router';
 import React from 'react';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import { tempReducer } from '../shared/reducers/combinedReducers';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import rootReducer from '../shared/reducers/combinedReducers';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { SSRComponent } from './SSRComponent';
 
@@ -28,6 +29,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.get("/api/users", (req, res) => {
+  db.get("users").find().then((users) => {
+    console.log("[Server] Users: " + users.length);
+    res.send({users});
+  });
+});
+
+app.post('/api/add_user', (req, res) => {
+  let user = {
+    name: req.body.name
+  };
+
+  db.collection('users').insert(user, (err) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log("[Server] Added Name: " + req.body.name);
+    res.send(req.body);
+  });
+});
+
 const routes = [
   '/',
   '/search',
@@ -43,7 +65,7 @@ app.get('*', (req, res) => {
   }
 
   db.get("restaurants").find().then((restaurants) => {
-    let store = createStore(tempReducer, { restaurants });
+    let store = createStore(rootReducer, {restaurants}, applyMiddleware(thunk));
 
     res.status(200).send(renderToStaticMarkup(
       <Provider store={store} >
@@ -54,20 +76,6 @@ app.get('*', (req, res) => {
     ));
   }).catch((e) => {
     console.log(e);
-  });
-});
-
-app.post('/add_user', (req, res) => {
-  let user = {
-    name: req.body.name
-  };
-
-  db.collection('users').insert(user, (err) => {
-    if(err) {
-      console.log(err);
-    }
-    console.log("[Server] Added Name: " + req.body.name);
-    res.send(req.body);
   });
 });
 

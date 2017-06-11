@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import { App } from '../../../shared/app.jsx';
-import { tempReducer } from '../../../shared/reducers/combinedReducers';
+import rootReducer from '../../../shared/reducers/combinedReducers';
 
 let props = window.APP_PROPS;
-let store = createStore(tempReducer, props.preloadedState);
+let store = createStore(rootReducer, props.preloadedState, applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>

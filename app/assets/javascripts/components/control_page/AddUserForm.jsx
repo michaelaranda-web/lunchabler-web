@@ -1,5 +1,6 @@
 import React from 'react';
-import $ from "jquery";
+import { connect } from 'react-redux';
+import { addUser } from '../../../../../shared/actions/userActions';
 import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
 export class AddUserForm extends React.Component {
@@ -28,20 +29,11 @@ export class AddUserForm extends React.Component {
   submitAddUser(e) {
     e.preventDefault();
 
-    let data = {
+    let newUser = {
       name: this.state.value
     };
 
-    $.ajax({
-      type: "POST",
-      url: '/add_user',
-      data: data,
-      dataType: "json"
-    }).done(() => {
-      alert("Posted to add_user successfully!");
-    }).fail((err) => {
-      console.log(err);
-    });
+    this.props.addUser(newUser);
   }
 
   render() {
@@ -67,4 +59,16 @@ export class AddUserForm extends React.Component {
       </div>
     );
   }
+}
+
+const mapStateToProps = state => {
+  return state;
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addUser: (user) => dispatch(addUser(user))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddUserForm)
