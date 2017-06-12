@@ -20,8 +20,6 @@ export class RestaurantItem extends React.Component {
     })
   }
 
-
-
   render() {
     return (
       <div className="restaurant-item">

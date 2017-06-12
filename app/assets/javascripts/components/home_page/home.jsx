@@ -13,6 +13,17 @@ export class Home extends React.Component {
     return <h1>Loading...</h1>;
   }
 
+  renderRestaurantList() {
+    return this.props.restaurants.map((restaurant, i) => {
+      return (
+        <div key={i}>
+          <RestaurantItem restaurant={restaurant}/>
+          <hr />
+        </div>
+      );
+    });
+  }
+
   render() {
     if (!this.props.restaurants) { return; }
 
@@ -27,7 +38,7 @@ export class Home extends React.Component {
             <br/>
             <Link to="control">Link to Control Page</Link>
 
-            <RestaurantItem restaurant={this.props.restaurants[0]}/>
+            {this.renderRestaurantList()}
           </div>
       );
     }
