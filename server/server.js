@@ -36,6 +36,13 @@ app.get("/api/users", (req, res) => {
   });
 });
 
+app.get("/api/restaurants", (req, res) => {
+  db.get("restaurants").find().then((restaurants) => {
+    console.log("[Server] Restaurants: " + restaurants.length);
+    res.send({restaurants});
+  });
+});
+
 app.post('/api/add_user', (req, res) => {
   let user = {
     name: req.body.name
