@@ -33,7 +33,7 @@ export class Home extends React.Component {
     else {
       return (
           <div id="home-page">
-            <p>This is the home page.</p>
+            <h1>Lunchabler</h1>
             <Link to="search">Link to Search Page</Link>
             <br/>
             <Link to="control">Link to Control Page</Link>
