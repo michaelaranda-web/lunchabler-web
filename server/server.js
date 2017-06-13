@@ -73,6 +73,22 @@ app.patch('/api/add_preference', (req, res) => {
   }
 });
 
+app.patch('/api/remove_preference', (req, res) => {
+  let user = {name: req.body.user};
+  let preferenceToRemove = req.body.preference === "meh" ? {mehs: user} : {nos: user};
+
+  try {
+    db.collection('restaurants').update(
+        {name: req.body.restaurant},
+        {$pull: preferenceToRemove}
+    );
+    console.log("[Server] Removed Preference");
+    res.send(req.body);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 const routes = [
   '/',
   '/search',
