@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+.restaurant-item {
+  padding: 10px 0;
+}
+
 .restaurant-thumbnail {
   height: 90px;
   width: 90px;
@@ -16,6 +20,7 @@ a {
   display: inline-block;
   min-width: 300px;
   vertical-align: top;
+  margin-left: 5px;
 }
 
 .restaurant-item h3 {
