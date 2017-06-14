@@ -122,7 +122,7 @@ app.get('*', (req, res) => {
   }
 
   db.get("restaurants").find().then((restaurants) => {
-    let store = createStore(rootReducer, {restaurants}, applyMiddleware(thunk));
+    let store = createStore(rootReducer, {restaurants: sortRestaurants(restaurants)}, applyMiddleware(thunk));
 
     res.status(200).send(renderToStaticMarkup(
       <Provider store={store} >
