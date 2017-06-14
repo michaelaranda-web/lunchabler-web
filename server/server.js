@@ -59,6 +59,22 @@ app.post('/api/add_user', (req, res) => {
   });
 });
 
+app.post('/api/add_restaurant', (req, res) => {
+  let restaurant = {
+    name: req.body.restaurant,
+    mehs: [],
+    nos: []
+  };
+
+  db.collection('restaurants').insert(restaurant, (err) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log("[Server] Added Restaurant: " + req.body.restaurant);
+    res.send(req.body);
+  });
+});
+
 app.patch('/api/add_preference', (req, res) => {
   let user = {name: req.body.user};
   let newPreference = req.body.preference === "meh" ? {mehs: user} : {nos: user};
