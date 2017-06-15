@@ -16,6 +16,18 @@ a {
   width: 90px;
 }
 
+.restaurant-filter-label {
+  position: relative;
+}
+
+.restaurant-filter-label .label {
+  border-radius: 20px 0 0 20px;
+}
+
+.restaurant-filter-label .remove {
+  border-radius: 0 20px 20px 0;
+}
+
 .restaurant-details {
   display: inline-block;
   min-width: 300px;
