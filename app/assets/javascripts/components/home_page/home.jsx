@@ -17,7 +17,9 @@ export class Home extends React.Component {
     return this.props.restaurants.map((restaurant, i) => {
       return (
         <div key={i}>
-          <RestaurantItem restaurant={restaurant}/>
+          <RestaurantItem restaurant={restaurant}
+                          rankingNumber={i+1}
+                          totalRestaurants={this.props.restaurants.length}/>
           <hr />
         </div>
       );

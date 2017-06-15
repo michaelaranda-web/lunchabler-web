@@ -9,6 +9,7 @@ export class RestaurantItem extends React.Component {
             src="https://s3-media2.fl.yelpcdn.com/bphoto/rKoDbuldNAVSr-DuKweMyQ/90s.jpg"/>
         <div className="restaurant-details">
           <h3>{this.props.restaurant.name}</h3>
+          <h4>{this.props.rankingNumber} of {this.props.totalRestaurants}</h4>
         </div>
         <RestaurantItemTabs restaurant={this.props.restaurant} />
       </div>
