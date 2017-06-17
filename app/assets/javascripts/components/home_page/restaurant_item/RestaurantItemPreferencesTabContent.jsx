@@ -1,4 +1,5 @@
 import React from 'react';
+import {UserPreferenceLabel} from './UserPreferenceLabel.jsx';
 
 export class RestaurantItemPreferencesTabContent extends React.Component {
   renderPreferenceList(users, listHeader, listClassName) {
@@ -16,7 +17,7 @@ export class RestaurantItemPreferencesTabContent extends React.Component {
     if (!users) { return; }
 
     return users.map((user, i) => {
-      return <li key={i}>{user.name}</li>
+      return <UserPreferenceLabel key={i} user={user} />
     })
   }
 

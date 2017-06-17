@@ -16,11 +16,7 @@ a {
   width: 90px;
 }
 
-.restaurant-filter-label {
-  position: relative;
-}
-
-.restaurant-filter-label .label {
+.restaurant-filter-label .filter-name {
   border-radius: 20px 0 0 20px;
 }
 
@@ -54,4 +50,14 @@ a {
 .user-list {
   list-style: none;
   padding-left: 0;
+}
+
+.user-preference-label .user-name {
+  line-height: 2;
+  border-radius: 20px 0 0 20px;
+}
+
+.user-preference-label .remove {
+  line-height: 2;
+  border-radius: 0 20px 20px 0;
 }

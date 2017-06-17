@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
-import { RestaurantItem } from './RestaurantItem.jsx';
+import { RestaurantItem } from './restaurant_item/RestaurantItem.jsx';
 
 export class Home extends React.Component {
   componentDidMount() {
