@@ -1,18 +1,18 @@
 import React from 'react';
-import {RestaurantItemTabs} from './RestaurantItemTabs.jsx';
 
 export class RestaurantItem extends React.Component {
   render() {
     return (
-      <div className="restaurant-item">
-        <img className="restaurant-thumbnail"
-            src="https://s3-media2.fl.yelpcdn.com/bphoto/rKoDbuldNAVSr-DuKweMyQ/90s.jpg"/>
+      <div className="restaurant-item" onClick={this._onClick.bind(this)}>
         <div className="restaurant-details">
-          <h3>{this.props.restaurant.name}</h3>
-          <h4>{this.props.rankingNumber} of {this.props.totalRestaurants}</h4>
+          <h4>{this.props.restaurant.name}</h4>
+          <span>{this.props.rankingNumber} of {this.props.totalRestaurants}</span>
         </div>
-        <RestaurantItemTabs restaurant={this.props.restaurant} />
       </div>
     );
+  }
+
+  _onClick() {
+    this.props.onClick(this.props.id);
   }
 }

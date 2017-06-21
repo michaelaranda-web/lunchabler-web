@@ -1,5 +1,5 @@
 import React from 'react';
-import  Home  from '../app/assets/javascripts/components/home_page/home.jsx';
+import { Home }  from '../app/assets/javascripts/components/home_page/home.jsx';
 import { Search } from '../app/assets/javascripts/components/search_page/search.jsx';
 import ControlPage from '../app/assets/javascripts/components/control_page/ControlPage.jsx';
 import { Switch, Route } from 'react-router-dom';
