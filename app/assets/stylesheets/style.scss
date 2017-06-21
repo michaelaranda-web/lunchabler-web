@@ -1,0 +1,67 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.restaurant-item {
+  padding: 10px 0;
+
+  h3 {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+  }
+
+  h4 {
+    margin: 0;
+  }
+
+  .restaurant-thumbnail {
+    height: 90px;
+    width: 90px;
+  }
+
+  .restaurant-details {
+    display: inline-block;
+    min-width: 300px;
+    vertical-align: top;
+    margin-left: 5px;
+  }
+}
+
+.restaurant-filter-label {
+  .filter-name {
+    border-radius: 20px 0 0 20px;
+  }
+
+  .remove {
+    border-radius: 0 20px 20px 0;
+  }
+}
+
+.meh-list, .no-list {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 20px;
+}
+
+.user-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.user-preference-label {
+  .user-name {
+    line-height: 2;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .remove {
+    line-height: 2;
+    border-radius: 0 20px 20px 0;
+  }
+}

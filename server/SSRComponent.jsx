@@ -8,6 +8,7 @@ export class SSRComponent extends React.Component {
       <html>
         <head>
           <title>Lunchabler</title>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossOrigin="anonymous"></link>
           <link rel="stylesheet" href="/stylesheets/style.css"></link>
         </head>
         <body>

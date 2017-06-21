@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const APP_DIR = path.resolve(__dirname, 'app');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: APP_DIR + '/assets/javascripts/index.jsx',
@@ -21,7 +22,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loader: "style-loader!css-loader",
+        exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader!sass-loader"
+        }),
+        exclude: /node_modules/
       },
       {
         test: /\.png$/,
@@ -48,5 +58,11 @@ module.exports = {
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       }
     ]
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: '../stylesheets/style.css',
+      allChunks: true
+    })
+  ]
 };
