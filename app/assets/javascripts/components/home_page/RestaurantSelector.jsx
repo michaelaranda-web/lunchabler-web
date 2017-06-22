@@ -17,10 +17,6 @@ export class RestaurantSelector extends React.Component {
     this.props.fetchRestaurants();
   }
 
-  renderLoading() {
-    return <h1>Loading...</h1>;
-  }
-
   renderRestaurantList() {
     return this.props.restaurants.map((restaurant, i) => {
       return (
@@ -37,10 +33,6 @@ export class RestaurantSelector extends React.Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return this.renderLoading()
-    }
-
     return (
       <div className="restaurant-selector">
         <div className="restaurant-list">
@@ -60,7 +52,6 @@ export class RestaurantSelector extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.restaurantsIsLoading,
     restaurants : state.restaurants
   }
 };

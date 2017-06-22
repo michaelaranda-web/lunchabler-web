@@ -1,6 +1,6 @@
 import React from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
-import {RestaurantItemPreferencesTabContent} from './RestaurantItemPreferencesTabContent.jsx';
+import RestaurantItemPreferencesTabContent from './RestaurantItemPreferencesTabContent.jsx';
 
 export class RestaurantItemTabs extends React.Component {
   constructor(props) {

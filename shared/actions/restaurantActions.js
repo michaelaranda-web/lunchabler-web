@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING } from '../constants/constants';
+import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING,
+REMOVE_USER_PREFERENCE_LOADING, REMOVE_USER_PREFERENCE_FAILED} from '../constants/constants';
 
 function fetchRestaurantsSuccess(restaurants) {
   return {
@@ -22,23 +23,16 @@ function fetchRestaurantsInProgress(bool) {
   };
 }
 
-function addUserPreferenceSuccess(restaurants) {
+function removeUserPreferenceFail(bool) {
   return {
-    type: ADD_USER_PREFERENCE_SUCCESS,
-    restaurants
-  };
-}
-
-function addUserPreferenceFail(bool) {
-  return {
-    type: ADD_USER_PREFERENCE_FAILED,
+    type: REMOVE_USER_PREFERENCE_FAILED,
     hasErrored: bool
   };
 }
 
-function addUserPreferenceInProgress(bool) {
+function removeUserPreferenceInProgress(bool) {
   return {
-    type: ADD_USER_PREFERENCE_LOADING,
+    type: REMOVE_USER_PREFERENCE_LOADING,
     isLoading: bool
   };
 }
@@ -56,15 +50,21 @@ export function fetchRestaurantsData() {
   };
 }
 
-export function addUserPreferenceToRestaurant(user, restaurant, pref) {
+export function removeUserPreferenceToRestaurant(userName, restaurantName, preference) {
+  let data = {
+    user: userName,
+    restaurant: restaurantName,
+    preference: preference
+  };
+
   return (dispatch) => {
-    dispatch(fetchRestaurantsInProgress(true));
-    axios.get('/api/restaurants')
+    dispatch(removeUserPreferenceInProgress(true));
+    axios.patch('/api/remove_preference', data)
         .then((response) => {
-          dispatch(fetchRestaurantsInProgress(false));
+          dispatch(removeUserPreferenceInProgress(false));
           return response.data.restaurants;
         })
-        .then((restaurants) => dispatch(fetchRestaurantsSuccess(restaurants)))
-        .catch((e) => {console.log(e); dispatch(fetchRestaurantsFail(true))});
+        .then((restaurants) => dispatch(fetchRestaurantsData()))
+        .catch((e) => {console.log(e); dispatch(removeUserPreferenceFail(true))});
   };
 }

@@ -84,7 +84,7 @@ app.patch('/api/add_preference', (req, res) => {
       {name: req.body.restaurant},
       {$push: newPreference}
     );
-    console.log("[Server] Added Preference");
+    console.log("[Server] Added Preference for", user.name);
     res.send(req.body);
   } catch (e) {
     console.log(e);
@@ -99,9 +99,10 @@ app.patch('/api/remove_preference', (req, res) => {
     db.collection('restaurants').update(
         {name: req.body.restaurant},
         {$pull: preferenceToRemove}
-    );
-    console.log("[Server] Removed Preference");
-    res.send(req.body);
+    ).then(() => {
+      console.log("[Server] Removed Preference for", user.name);
+      res.send(req.body);
+    });
   } catch (e) {
     console.log(e);
   }

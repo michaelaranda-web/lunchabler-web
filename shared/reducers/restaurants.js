@@ -1,4 +1,5 @@
-import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING } from '../constants/constants';
+import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING,
+ REMOVE_USER_PREFERENCE_FAILED, REMOVE_USER_PREFERENCE_LOADING} from '../constants/constants';
 
 export function restaurantsIsLoading(state = false, action) {
   switch(action.type) {
@@ -22,6 +23,24 @@ export function restaurants(state = [], action) {
   switch(action.type) {
     case FETCH_RESTAURANTS_SUCCESS:
       return action.restaurants;
+    default:
+      return state;
+  }
+}
+
+export function removeUserPreferenceIsLoading(state = false, action) {
+  switch(action.type) {
+    case REMOVE_USER_PREFERENCE_LOADING:
+      return action.isLoading;
+    default:
+      return state;
+  }
+}
+
+export function removeUserPreferenceHasFailed(state = false, action) {
+  switch(action.type) {
+    case REMOVE_USER_PREFERENCE_FAILED:
+      return action.hasErrored;
     default:
       return state;
   }
