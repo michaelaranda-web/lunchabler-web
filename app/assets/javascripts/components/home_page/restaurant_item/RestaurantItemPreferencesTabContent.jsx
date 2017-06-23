@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserPreferenceLabel from './UserPreferenceLabel.jsx';
+import UserPreferenceRow from './UserPreferenceRow.jsx';
 
 export class RestaurantItemPreferencesTabContent extends React.Component {
   renderPreferenceList(users, preference, listHeader, listClassName) {
@@ -9,6 +10,7 @@ export class RestaurantItemPreferencesTabContent extends React.Component {
           <h4>{listHeader}</h4>
           <ul className="user-list">
             {this._renderPreferenceListItems(users, preference)}
+            <UserPreferenceRow />
           </ul>
         </div>
     );

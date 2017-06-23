@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { RestaurantItem } from './restaurant_item/RestaurantItem.jsx';
 import { RestaurantViewerPanel } from './RestaurantViewerPanel.jsx';
 import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
+import { fetchUsersData } from '../../../../../shared/actions/userActions';
 
 export class RestaurantSelector extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export class RestaurantSelector extends React.Component {
 
   componentDidMount() {
     this.props.fetchRestaurants();
+    this.props.fetchUsersData();
   }
 
   renderRestaurantList() {
@@ -58,7 +60,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRestaurants: () => dispatch(fetchRestaurantsData())
+    fetchRestaurants: () => dispatch(fetchRestaurantsData()),
+    fetchUsersData: () => dispatch(fetchUsersData())
   };
 };
 
