@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { RestaurantItem } from './restaurant_item/RestaurantItem.jsx';
-import { RestaurantViewerPanel } from './RestaurantViewerPanel.jsx';
+import { RestaurantSummary } from './RestaurantSummary.jsx';
 import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
 import { fetchUsersData } from '../../../../../shared/actions/userActions';
 import { findWithAttr } from '../../../../../helpers/arrayHelper';
@@ -35,13 +35,13 @@ export class RestaurantSelector extends React.Component {
     });
   }
 
-  renderRestaurantViewerPanel() {
+  renderRestaurantSummary() {
     let indexOfCurrentRestaurant = this.state.currentRestaurant ?
         findWithAttr(this.props.restaurants, "name", this.state.currentRestaurant)
         : 0;
 
     return (
-        <RestaurantViewerPanel restaurant={this.props.restaurants[indexOfCurrentRestaurant]}
+        <RestaurantSummary restaurant={this.props.restaurants[indexOfCurrentRestaurant]}
                            totalRestaurants={this.props.restaurants.length}/>
     );
   }
@@ -52,7 +52,7 @@ export class RestaurantSelector extends React.Component {
         <div className="restaurant-list">
           {this.renderRestaurantList()}
         </div>
-        {this.renderRestaurantViewerPanel()}
+        {this.renderRestaurantSummary()}
       </div>
     );
   }

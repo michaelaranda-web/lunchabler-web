@@ -1,7 +1,7 @@
 import React from 'react';
 import {RestaurantItemTabs} from './restaurant_item/RestaurantItemTabs.jsx';
 
-export class RestaurantViewerPanel extends React.Component {
+export class RestaurantSummary extends React.Component {
   render() {
     return (
       <div className="restaurant-viewer-panel">
