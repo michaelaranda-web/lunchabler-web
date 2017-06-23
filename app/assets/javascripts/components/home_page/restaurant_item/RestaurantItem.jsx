@@ -13,6 +13,6 @@ export class RestaurantItem extends React.Component {
   }
 
   _onClick() {
-    this.props.onClick(this.props.id);
+    this.props.onClick(this.props.restaurant.name);
   }
 }

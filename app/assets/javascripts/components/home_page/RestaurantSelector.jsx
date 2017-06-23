@@ -4,13 +4,14 @@ import { RestaurantItem } from './restaurant_item/RestaurantItem.jsx';
 import { RestaurantViewerPanel } from './RestaurantViewerPanel.jsx';
 import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
 import { fetchUsersData } from '../../../../../shared/actions/userActions';
+import { findWithAttr } from '../../../../../helpers/arrayHelper';
 
 export class RestaurantSelector extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentRestaurant: 0
+      currentRestaurant: null
     };
   }
 
@@ -22,16 +23,27 @@ export class RestaurantSelector extends React.Component {
   renderRestaurantList() {
     return this.props.restaurants.map((restaurant, i) => {
       return (
-          <div key={i}>
-            <RestaurantItem id={i}
-                            restaurant={restaurant}
-                            rankingNumber={i+1}
-                            totalRestaurants={this.props.restaurants.length}
-                            onClick={this.updateCurrentRestaurant.bind(this)}/>
-            <hr />
-          </div>
+        <div key={i}>
+          <RestaurantItem id={i}
+                          restaurant={restaurant}
+                          rankingNumber={i+1}
+                          totalRestaurants={this.props.restaurants.length}
+                          onClick={this.updateCurrentRestaurant.bind(this)}/>
+          <hr />
+        </div>
       );
     });
+  }
+
+  renderRestaurantViewerPanel() {
+    let indexOfCurrentRestaurant = this.state.currentRestaurant ?
+        findWithAttr(this.props.restaurants, "name", this.state.currentRestaurant)
+        : 0;
+
+    return (
+        <RestaurantViewerPanel restaurant={this.props.restaurants[indexOfCurrentRestaurant]}
+                           totalRestaurants={this.props.restaurants.length}/>
+    );
   }
 
   render() {
@@ -40,15 +52,13 @@ export class RestaurantSelector extends React.Component {
         <div className="restaurant-list">
           {this.renderRestaurantList()}
         </div>
-
-        <RestaurantViewerPanel restaurant={this.props.restaurants[this.state.currentRestaurant]}
-                               totalRestaurants={this.props.restaurants.length}/>
+        {this.renderRestaurantViewerPanel()}
       </div>
     );
   }
 
-  updateCurrentRestaurant(key) {
-    this.setState({currentRestaurant: key});
+  updateCurrentRestaurant(restaurantName) {
+    this.setState({currentRestaurant: restaurantName});
   }
 }
 

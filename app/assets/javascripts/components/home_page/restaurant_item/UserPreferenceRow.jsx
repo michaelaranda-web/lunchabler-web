@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Autocomplete from 'react-autocomplete';
+import {addUserPreferenceToRestaurant} from '../../../../../../shared/actions/restaurantActions';
 
 export class UserPreferenceRow extends React.Component {
   constructor(props) {
@@ -27,9 +28,23 @@ export class UserPreferenceRow extends React.Component {
             onChange={(e) => this.setState({value: e.target.value})}
             onSelect={(val) => this.setState({value: val})}
             shouldItemRender={matchNameToValue}
+            inputProps={{onKeyUp: this._handleKeyPress.bind(this)}}
         />
       </div>
     );
+  }
+
+  _handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      for (let user of this.props.users) {
+        if (user.name === this.state.value) {
+          this.props.addUserPreferenceToRestaurant(this.state.value,
+                                                    this.props.restaurant.name,
+                                                    this.props.preference);
+          return;
+        }
+      }
+    }
   }
 }
 
@@ -45,4 +60,11 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, null)(UserPreferenceRow)
+const mapDispatchToProps = dispatch => {
+  return {
+    addUserPreferenceToRestaurant: (user, restaurant, preference) =>
+        dispatch(addUserPreferenceToRestaurant(user, restaurant, preference))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPreferenceRow)

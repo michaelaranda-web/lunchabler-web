@@ -83,9 +83,10 @@ app.patch('/api/add_preference', (req, res) => {
     db.collection('restaurants').update(
       {name: req.body.restaurant},
       {$push: newPreference}
-    );
-    console.log("[Server] Added Preference for", user.name);
-    res.send(req.body);
+    ).then(() => {
+      console.log("[Server] Added Preference for", user.name);
+      res.send(req.body);
+    });
   } catch (e) {
     console.log(e);
   }

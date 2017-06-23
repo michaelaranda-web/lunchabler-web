@@ -10,7 +10,9 @@ export class RestaurantItemPreferencesTabContent extends React.Component {
           <h4>{listHeader}</h4>
           <ul className="user-list">
             {this._renderPreferenceListItems(users, preference)}
-            <UserPreferenceRow />
+            <UserPreferenceRow
+                preference={preference}
+                restaurant={this.props.restaurant} />
           </ul>
         </div>
     );
@@ -27,15 +29,7 @@ export class RestaurantItemPreferencesTabContent extends React.Component {
     })
   }
 
-  renderLoading() {
-    return <h1>Loading...</h1>;
-  }
-
   render() {
-    if (this.props.isLoading) {
-      return this.renderLoading()
-    }
-
     return (
         <div className="preferences-tab-content">
           {this.renderPreferenceList(this.props.restaurant.mehs, "meh", "Meh's", "meh-list")}
