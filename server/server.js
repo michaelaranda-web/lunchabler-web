@@ -111,7 +111,6 @@ app.patch('/api/remove_preference', (req, res) => {
 
 const routes = [
   '/',
-  '/search',
   '/control'
 ];
 

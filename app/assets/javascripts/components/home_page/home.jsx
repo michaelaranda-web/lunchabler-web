@@ -7,8 +7,6 @@ export class Home extends React.Component {
     return (
         <div id="home-page">
           <h1>Lunchabler</h1>
-          <Link to="search">Link to Search Page</Link>
-          <br/>
           <Link to="control">Link to Control Page</Link>
 
           <RestaurantSelector />
