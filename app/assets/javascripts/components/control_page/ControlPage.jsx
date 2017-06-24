@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsersData } from '../../../../../shared/actions/userActions';
+import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
 import AddUserForm from './AddUserForm.jsx';
+import AddRestaurantForm from './AddRestaurantForm.jsx';
 
 export class ControlPage extends React.Component {
   componentDidMount() {
     this.props.fetchUsers();
+    this.props.fetchRestaurantsData();
   }
 
   renderRestaurantList() {
@@ -30,7 +33,8 @@ export class ControlPage extends React.Component {
         <AddUserForm />
         <h3>Registered Users</h3>
         {this.renderUserList()}
-        <h1>List of Restaurants</h1>
+        <AddRestaurantForm />
+        <h3>List of Restaurants</h3>
         <div className="restaurants-list">
           {this.renderRestaurantList()}
         </div>
@@ -48,7 +52,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUsers: () => dispatch(fetchUsersData())
+    fetchUsers: () => dispatch(fetchUsersData()),
+    fetchRestaurantsData: () => dispatch(fetchRestaurantsData())
   };
 };
 

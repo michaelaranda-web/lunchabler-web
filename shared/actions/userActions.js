@@ -35,9 +35,9 @@ export function fetchUsersData() {
   };
 }
 
-export function addUser(user) {
+export function addUser(userName) {
   return (dispatch) => {
-    axios.post('/api/add_user', user)
+    axios.post('/api/add_user', {name: userName})
         .then(() => dispatch(fetchUsersData()))
         .catch((e) => {console.log(e)});
   };

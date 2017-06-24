@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING,
 REMOVE_USER_PREFERENCE_LOADING, REMOVE_USER_PREFERENCE_FAILED, ADD_USER_PREFERENCE_LOADING,
-  ADD_USER_PREFERENCE_FAILED} from '../constants/constants';
+  ADD_USER_PREFERENCE_FAILED, ADD_RESTAURANT_LOADING, ADD_RESTAURANT_FAILED} from '../constants/constants';
 
 function fetchRestaurantsSuccess(restaurants) {
   return {
@@ -20,6 +20,20 @@ function fetchRestaurantsFail(bool) {
 function fetchRestaurantsInProgress(bool) {
   return {
     type: FETCH_RESTAURANTS_LOADING,
+    isLoading: bool
+  };
+}
+
+function addRestaurantFail(bool) {
+  return {
+    type: ADD_RESTAURANT_FAILED,
+    hasErrored: bool
+  };
+}
+
+function addRestaurantInProgress(bool) {
+  return {
+    type: ADD_RESTAURANT_LOADING,
     isLoading: bool
   };
 }
@@ -62,6 +76,19 @@ export function fetchRestaurantsData() {
         })
         .then((restaurants) => dispatch(fetchRestaurantsSuccess(restaurants)))
         .catch((e) => {console.log(e); dispatch(fetchRestaurantsFail(true))});
+  };
+}
+
+export function addRestaurant(restaurantName) {
+  return (dispatch) => {
+    dispatch(addRestaurantInProgress(true));
+    axios.post('/api/add_restaurant', {restaurant: restaurantName})
+        .then((response) => {
+          dispatch(addRestaurantInProgress(false));
+          return response.data.restaurants;
+        })
+        .then((restaurants) => dispatch(fetchRestaurantsData()))
+        .catch((e) => {console.log(e); dispatch(addRestaurantFail(true))});
   };
 }
 

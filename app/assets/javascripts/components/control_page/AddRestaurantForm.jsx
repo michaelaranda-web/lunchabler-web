@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addUser } from '../../../../../shared/actions/userActions';
+import { addRestaurant } from '../../../../../shared/actions/restaurantActions';
 import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
-export class AddUserForm extends React.Component {
+export class AddRestaurantForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -12,7 +12,7 @@ export class AddUserForm extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.submitAddUser = this.submitAddUser.bind(this);
+    this.submitAddRestaurant = this.submitAddRestaurant.bind(this);
   }
 
   getValidationState() {
@@ -26,17 +26,17 @@ export class AddUserForm extends React.Component {
     this.setState({ value: e.target.value });
   }
 
-  submitAddUser(e) {
+  submitAddRestaurant(e) {
     e.preventDefault();
-    this.props.addUser(this.state.value);
+    this.props.addRestaurant(this.state.value);
   }
 
   render() {
     return (
-      <div id="add-user-form">
-        <h1>Add new user</h1>
+      <div id="add-restaurant-form">
+        <h1>Add new restaurant</h1>
 
-        <form onSubmit={this.submitAddUser}>
+        <form onSubmit={this.submitAddRestaurant}>
           <FormGroup
               controlId="formBasicText"
               validationState={this.getValidationState()}
@@ -45,7 +45,7 @@ export class AddUserForm extends React.Component {
             <FormControl
                 type="text"
                 value={this.state.value}
-                placeholder="Enter name"
+                placeholder="Enter restaurant name"
                 onChange={this.handleChange}
             />
             <FormControl.Feedback />
@@ -58,8 +58,8 @@ export class AddUserForm extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addUser: (user) => dispatch(addUser(user))
+    addRestaurant: (restaurant) => dispatch(addRestaurant(restaurant))
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddUserForm)
+export default connect(null, mapDispatchToProps)(AddRestaurantForm)
