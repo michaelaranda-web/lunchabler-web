@@ -41,6 +41,7 @@ export class UserPreferenceRow extends React.Component {
           this.props.addUserPreferenceToRestaurant(this.state.value,
                                                     this.props.restaurant.name,
                                                     this.props.preference);
+          this.setState({value: ''});
           return;
         }
       }
