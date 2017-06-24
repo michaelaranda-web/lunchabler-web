@@ -4,6 +4,7 @@ import { RestaurantItem } from './restaurant_item/RestaurantItem.jsx';
 import { RestaurantSummary } from './RestaurantSummary.jsx';
 import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
 import { fetchUsersData } from '../../../../../shared/actions/userActions';
+import { sortRestaurants } from '../../../../../helpers/restaurantHelper';
 import { findWithAttr } from '../../../../../helpers/arrayHelper';
 
 export class RestaurantSelector extends React.Component {
@@ -11,8 +12,15 @@ export class RestaurantSelector extends React.Component {
     super(props);
 
     this.state = {
-      currentRestaurant: null
+      currentRestaurant: null,
+      sortedRestaurantsList: []
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props !== nextProps) {
+      this.setState({sortedRestaurantsList: sortRestaurants(nextProps.restaurants)});
+    }
   }
 
   componentDidMount() {
@@ -21,13 +29,13 @@ export class RestaurantSelector extends React.Component {
   }
 
   renderRestaurantList() {
-    return this.props.restaurants.map((restaurant, i) => {
+    return this.state.sortedRestaurantsList.map((restaurant, i) => {
       return (
         <div key={i}>
           <RestaurantItem id={i}
                           restaurant={restaurant}
                           rankingNumber={i+1}
-                          totalRestaurants={this.props.restaurants.length}
+                          totalRestaurants={this.state.sortedRestaurantsList.length}
                           onClick={this.updateCurrentRestaurant.bind(this)}/>
           <hr />
         </div>

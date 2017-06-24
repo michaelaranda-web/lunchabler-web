@@ -41,7 +41,7 @@ app.get("/api/users", (req, res) => {
 app.get("/api/restaurants", (req, res) => {
   db.get("restaurants").find().then((restaurants) => {
     console.log("[Server] Restaurants: " + restaurants.length);
-    res.send({restaurants: sortRestaurants(restaurants)});
+    res.send({restaurants: restaurants});
   });
 });
 
