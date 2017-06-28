@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RestaurantItem } from './restaurant_item/RestaurantItem.jsx';
 import { RestaurantSummary } from './RestaurantSummary.jsx';
+import LunchGroup from './LunchGroup.jsx';
 import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
 import { fetchUsersData } from '../../../../../shared/actions/userActions';
 import { sortRestaurants } from '../../../../../helpers/restaurantHelper';
@@ -57,6 +58,7 @@ export class RestaurantSelector extends React.Component {
   render() {
     return (
       <div className="restaurant-selector">
+        <LunchGroup />
         <div className="restaurant-list">
           {this.renderRestaurantList()}
         </div>

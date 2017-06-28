@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 20px 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -20,7 +20,24 @@ hr {
 .restaurant-selector {
   padding: 10px 0;
 
+  .lunch-group {
+    min-height: 100px;
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #cddae2;
+    background: #f0f3f8;
+    border-radius: 4px;
+
+    .header {
+      margin: 0;
+      font-size: 13.4px;
+      padding-bottom: 5px;
+    }
+  }
+
   .restaurant-list {
+    //TODO: Use bootstrap columns
+    width: 30%;
     display: inline-block;
     height: 400px;
     max-width: 300px;
@@ -37,8 +54,9 @@ hr {
   }
 
   .restaurant-viewer-panel {
+    //TODO: Use bootstrap columns
+    width: 60%;
     display: inline-block;
-    width: 700px;
     vertical-align: top;
     margin: 0 20px;
 
@@ -90,6 +108,21 @@ hr {
 }
 
 .user-preference-label {
+  .user-name {
+    line-height: 2;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .remove {
+    line-height: 2;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+  }
+}
+
+.lunch-group-user-label {
+  display: inline-block;
+
   .user-name {
     line-height: 2;
     border-radius: 20px 0 0 20px;
