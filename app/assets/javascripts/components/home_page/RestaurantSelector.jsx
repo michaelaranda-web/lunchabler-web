@@ -12,16 +12,12 @@ export class RestaurantSelector extends React.Component {
   constructor(props) {
     super(props);
 
+    //TODO: Refactor restaurantList and usersInLunchGroup into Redux state
     this.state = {
       currentRestaurant: null,
-      sortedRestaurantsList: []
+      restaurantList: this.props.restaurants,
+      usersInLunchGroup: []
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(this.props !== nextProps) {
-      this.setState({sortedRestaurantsList: sortRestaurants(nextProps.restaurants)});
-    }
   }
 
   componentDidMount() {
@@ -30,14 +26,14 @@ export class RestaurantSelector extends React.Component {
   }
 
   renderRestaurantList() {
-    return this.state.sortedRestaurantsList.map((restaurant, i) => {
+    return this.state.restaurantList.map((restaurant, i) => {
       return (
         <div key={i}>
           <RestaurantItem id={i}
                           restaurant={restaurant}
                           rankingNumber={i+1}
-                          totalRestaurants={this.state.sortedRestaurantsList.length}
-                          onClick={this.updateCurrentRestaurant.bind(this)}/>
+                          totalRestaurants={this.state.restaurantList.length}
+                          onClick={this._updateCurrentRestaurant.bind(this)}/>
           <hr />
         </div>
       );
@@ -58,7 +54,9 @@ export class RestaurantSelector extends React.Component {
   render() {
     return (
       <div className="restaurant-selector">
-        <LunchGroup />
+        <LunchGroup
+            usersInLunchGroup={this.state.usersInLunchGroup}
+            onLunchGroupUpdate={this._updateUsersInLunchGroup.bind(this)} />
         <div className="restaurant-list">
           {this.renderRestaurantList()}
         </div>
@@ -67,8 +65,24 @@ export class RestaurantSelector extends React.Component {
     );
   }
 
-  updateCurrentRestaurant(restaurantName) {
+  _updateCurrentRestaurant(restaurantName) {
     this.setState({currentRestaurant: restaurantName});
+  }
+
+  _updateUsersInLunchGroup(action, userName) {
+    let newGroup = this.state.usersInLunchGroup.slice();
+
+    if (action === "add") {
+      newGroup.push(userName);
+    }
+    else if (action === "remove") {
+      let index = newGroup.indexOf(userName);
+      newGroup.splice(index, 1);
+    }
+
+    this.setState({usersInLunchGroup: newGroup}, () => {
+      this.setState({restaurantList: sortRestaurants(this.props.restaurants, this.state.usersInLunchGroup)})
+    });
   }
 }
 

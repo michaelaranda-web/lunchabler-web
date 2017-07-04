@@ -1,5 +1,50 @@
-export function sortRestaurants(restaurants) {
-  return restaurants.sort(compareRestaurantsByPreferences);
+export function sortRestaurants(restaurants, usersInLunchGroup) {
+  if (!usersInLunchGroup || usersInLunchGroup.length === 0) {
+    return restaurants;
+  }
+
+  let restaurantsWithGroupPreferences = _getRestaurantsWithGroupPreferencesOnly(restaurants, usersInLunchGroup);
+  let restaurantsSortedByGroupPreferences = restaurantsWithGroupPreferences.sort(compareRestaurantsByPreferences);
+  let sortedRestaurantNames = restaurantsSortedByGroupPreferences.map((restaurant) => {
+    return restaurant.name;
+  });
+
+  let sortedRestaurants = [];
+  restaurants.map((restaurant, i) => {
+    let index = sortedRestaurantNames.indexOf(restaurant.name);
+
+    if(index === -1) {
+      throw "Error while sorting restaurants for restaurant: " + restaurant.name;
+    }
+
+    sortedRestaurants[index] = restaurant;
+  });
+
+  return sortedRestaurants;
+}
+
+function _getRestaurantsWithGroupPreferencesOnly(restaurants, usersInLunchGroup) {
+  let restaurantsWithGroupPreferencesOnly = [];
+
+  for (let restaurant of restaurants) {
+    let preferences = [[],[]];
+
+    [restaurant.mehs, restaurant.nos].map((prefArray, i) => {
+      for (let pref of prefArray) {
+        if (usersInLunchGroup.indexOf(pref.name) !== -1) {
+          preferences[i].push(pref.name);
+        }
+      }
+    });
+
+    restaurantsWithGroupPreferencesOnly.push({
+      name: restaurant.name,
+      mehs: preferences[0],
+      nos: preferences[1]
+    });
+  }
+
+  return restaurantsWithGroupPreferencesOnly;
 }
 
 function compareRestaurantsByPreferences(a, b) {

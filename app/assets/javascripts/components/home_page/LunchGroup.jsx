@@ -9,8 +9,7 @@ export class LunchGroup extends React.Component {
     super(props);
 
     this.state = {
-      value: '',
-      usersInLunchGroup: []
+      value: ''
     }
   }
 
@@ -44,7 +43,7 @@ export class LunchGroup extends React.Component {
 
   renderLunchGroupList() {
     return (
-      this.state.usersInLunchGroup.map((userName, i) => {
+      this.props.usersInLunchGroup.map((userName, i) => {
         return <LunchGroupUserLabel key={i}
                                     userName={userName}
                                     onRemoveClick={this._onUserLabelRemoveClick.bind(this)} />
@@ -55,21 +54,17 @@ export class LunchGroup extends React.Component {
   _handleKeyPress(e) {
     if (e.key === 'Enter') {
       let isValidUser = findWithAttr(this.props.users, "name", this.state.value) !== -1;
-      let isNotAlreadyInLunchGroup = this.state.usersInLunchGroup.indexOf(this.state.value) === -1;
+      let isNotAlreadyInLunchGroup = this.props.usersInLunchGroup.indexOf(this.state.value) === -1;
 
       if (isValidUser && isNotAlreadyInLunchGroup) {
-        let newGroup = this.state.usersInLunchGroup.slice();
-        newGroup.push(this.state.value);
-        this.setState({usersInLunchGroup: newGroup});
+        this.props.onLunchGroupUpdate("add", this.state.value);
+        this.setState({value: ''});
       }
     }
   }
 
   _onUserLabelRemoveClick(userName) {
-    let index = findWithAttr(this.state.usersInLunchGroup, "name", userName);
-    let newGroup = this.state.usersInLunchGroup.slice();
-    newGroup.splice(index, 1);
-    this.setState({usersInLunchGroup: newGroup});
+    this.props.onLunchGroupUpdate("remove", userName);
   }
 }
 

@@ -15,8 +15,6 @@ import rootReducer from '../shared/reducers/combinedReducers';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { SSRComponent } from './SSRComponent';
 
-import { sortRestaurants } from '../helpers/restaurantHelper';
-
 let db_url = (process.env.NODE_ENV == 'production') ? process.env.MONGODB_URI : 'localhost:27017/lunchabler';
 let db = monk(db_url);
 
@@ -123,7 +121,7 @@ app.get('*', (req, res) => {
   }
 
   db.get("restaurants").find().then((restaurants) => {
-    let store = createStore(rootReducer, {restaurants: sortRestaurants(restaurants)}, applyMiddleware(thunk));
+    let store = createStore(rootReducer, {restaurants: restaurants}, applyMiddleware(thunk));
 
     res.status(200).send(renderToStaticMarkup(
       <Provider store={store} >
