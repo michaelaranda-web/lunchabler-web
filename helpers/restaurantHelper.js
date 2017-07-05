@@ -1,10 +1,10 @@
-export function sortRestaurants(restaurants, usersInLunchGroup) {
+export function sortRestaurantsByLunchGroupPreferences(restaurants, usersInLunchGroup) {
   if (!usersInLunchGroup || usersInLunchGroup.length === 0) {
-    return restaurants;
+    return restaurants.sort(compareRestaurantsByPreferences);
   }
 
-  let restaurantsWithGroupPreferences = _getRestaurantsWithGroupPreferencesOnly(restaurants, usersInLunchGroup);
-  let restaurantsSortedByGroupPreferences = restaurantsWithGroupPreferences.sort(compareRestaurantsByPreferences);
+  let restaurantsSortedByGroupPreferences = _getRestaurantsWithGroupPreferencesOnly(restaurants,
+      usersInLunchGroup).sort(compareRestaurantsByPreferences);
   let sortedRestaurantNames = restaurantsSortedByGroupPreferences.map((restaurant) => {
     return restaurant.name;
   });

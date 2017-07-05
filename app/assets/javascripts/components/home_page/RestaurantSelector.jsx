@@ -5,7 +5,7 @@ import { RestaurantSummary } from './RestaurantSummary.jsx';
 import LunchGroup from './LunchGroup.jsx';
 import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
 import { fetchUsersData } from '../../../../../shared/actions/userActions';
-import { sortRestaurants } from '../../../../../helpers/restaurantHelper';
+import { sortRestaurantsByLunchGroupPreferences } from '../../../../../helpers/restaurantHelper';
 import { findWithAttr } from '../../../../../helpers/arrayHelper';
 
 export class RestaurantSelector extends React.Component {
@@ -15,7 +15,7 @@ export class RestaurantSelector extends React.Component {
     //TODO: Refactor restaurantList and usersInLunchGroup into Redux state
     this.state = {
       currentRestaurant: null,
-      restaurantList: this.props.restaurants,
+      restaurantList: sortRestaurantsByLunchGroupPreferences(this.props.restaurants),
       usersInLunchGroup: []
     };
   }
@@ -81,7 +81,7 @@ export class RestaurantSelector extends React.Component {
     }
 
     this.setState({usersInLunchGroup: newGroup}, () => {
-      this.setState({restaurantList: sortRestaurants(this.props.restaurants, this.state.usersInLunchGroup)})
+      this.setState({restaurantList: sortRestaurantsByLunchGroupPreferences(this.props.restaurants, this.state.usersInLunchGroup)})
     });
   }
 }
