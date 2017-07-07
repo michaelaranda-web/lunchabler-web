@@ -33,6 +33,7 @@ export class RestaurantSelector extends React.Component {
                           restaurant={restaurant}
                           rankingNumber={i+1}
                           totalRestaurants={this.state.restaurantList.length}
+                          usersInLunchGroup={this.state.usersInLunchGroup}
                           onClick={this._updateCurrentRestaurant.bind(this)}/>
           <hr />
         </div>

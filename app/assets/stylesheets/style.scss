@@ -37,10 +37,9 @@ hr {
 
   .restaurant-list {
     //TODO: Use bootstrap columns
-    width: 30%;
+    width: 40%;
     display: inline-block;
     height: 400px;
-    max-width: 300px;
     overflow-x: hidden;
 
     .restaurant-item {
@@ -50,12 +49,30 @@ hr {
       h4 {
         margin: 0;
       }
+
+      .restaurant-details {
+        display: inline-block;
+      }
+
+      .preference-counts {
+        margin-right: 10px;
+        float: right;
+
+        .mehs {
+          font-weight: bold;
+        }
+
+        .nos {
+          margin-left: 10px;
+          font-weight: bold;
+        }
+      }
     }
   }
 
   .restaurant-viewer-panel {
     //TODO: Use bootstrap columns
-    width: 60%;
+    width: 50%;
     display: inline-block;
     vertical-align: top;
     margin: 0 20px;
