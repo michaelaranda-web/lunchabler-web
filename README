@@ -1,9 +1,20 @@
 ===============================================================================================================================================
-Troubleshooting
+LUNCHABLER README
 ===============================================================================================================================================
 
-Running npm start, but application hangs when trying to visit the page.
+Running the application:
     - Make sure that Mongo database is successfully up and running
     - On Cloud9, running 'mongod' seems to run the global version which does not use the --no-journal flag. The flag is necessary
       because otherwise, mongo tries to reserve 2GB of memory that Cloud9 does not allow.
     - Instead, run '~/mongod'
+    
+Seeding the db:
+    - mongoimport --db lunchabler --collection restaurants --drop --file ~/workspace/db/seeds/restaurants.json --jsonArray
+        --db                specifies which database to import into
+        --collection        specifies which collection to import into
+        --drop              if collection already exists, drops the existing collection before importing
+        --file              specifies seed file
+        --jsonArray         "Accepts the import of data expressed with multiple MongoDB documents within a single JSON array."
+        
+        More info: https://docs.mongodb.com/getting-started/shell/import-data/
+    
