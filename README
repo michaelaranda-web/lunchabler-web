@@ -1,0 +1,9 @@
+===============================================================================================================================================
+Troubleshooting
+===============================================================================================================================================
+
+Running npm start, but application hangs when trying to visit the page.
+    - Make sure that Mongo database is successfully up and running
+    - On Cloud9, running 'mongod' seems to run the global version which does not use the --no-journal flag. The flag is necessary
+      because otherwise, mongo tries to reserve 2GB of memory that Cloud9 does not allow.
+    - Instead, run '~/mongod'
