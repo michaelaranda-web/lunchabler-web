@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-var app = require('../build/server.js');
+var app = require('../server/server');
 var debug = require('debug')('lunchabler:server');
 var http = require('http');
 

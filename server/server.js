@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import rootReducer from '../shared/reducers/combinedReducers';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { SSRComponent } from './SSRComponent';
+import { SSRComponent } from './SSRComponent.jsx';
 
 let db_url = (process.env.NODE_ENV == 'production') ? process.env.MONGODB_URI : 'michaelaranda-web-lunchabler-5771462:27017/lunchabler';
 let db = monk(db_url);

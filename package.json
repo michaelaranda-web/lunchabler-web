@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "build": "npm run clean && webpack --config ./webpack.config.client.js && npm run build-server",
-    "build-server": "babel -d ./build ./server -s && webpack --config ./webpack.config.server.js",
+    "build-server": "webpack --config ./webpack.config.server.js",
     "clean": "rm -rf build && mkdir build && rm -rf dist && mkdir dist",
     "dev": "nodemon ./bin/www --exec babel-node",
     "heroku-postbuild": "npm run build",
-    "start": "node ./build/server.js"
+    "start": "babel-node ./bin/www"
   },
   "dependencies": {
     "axios": "^0.16.2",

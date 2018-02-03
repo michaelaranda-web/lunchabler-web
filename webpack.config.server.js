@@ -1,12 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const SERVER_DIR = path.resolve(__dirname, 'bin');
+const SERVER_DIR = path.resolve(__dirname, 'server');
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
 module.exports = {
   name: "SSR",
-  entry: SERVER_DIR + '/www',
+  entry: SERVER_DIR + '/server.js',
   output: {
     path: BUILD_DIR,
     filename: 'server.js',
