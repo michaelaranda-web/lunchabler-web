@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Autocomplete from 'react-autocomplete';
 import {LunchGroupUserLabel} from './LunchGroupUserLabel.jsx';
 import { findWithAttr } from '../../../../../helpers/arrayHelper';
+import { addUserToLunchGroup, removeUserFromLunchGroup } from '../../../../../shared/actions/lunchGroupActions';
 
 export class LunchGroup extends React.Component {
   constructor(props) {
@@ -58,6 +59,7 @@ export class LunchGroup extends React.Component {
 
       if (isValidUser && isNotAlreadyInLunchGroup) {
         this.props.onLunchGroupUpdate("add", this.state.value);
+        this.props.addUserToLunchGroup(this.state.value);
         this.setState({value: ''});
       }
     }
@@ -65,6 +67,7 @@ export class LunchGroup extends React.Component {
 
   _onUserLabelRemoveClick(userName) {
     this.props.onLunchGroupUpdate("remove", userName);
+    this.props.removeUserFromLunchGroup(userName);
   }
 }
 
@@ -76,8 +79,16 @@ function matchNameToValue(item, value) {
 
 const mapStateToProps = state => {
   return {
-    users : state.users
+    users : state.users,
+    lunchGroup: state.lunchGroup
   }
 };
 
-export default connect(mapStateToProps, null)(LunchGroup)
+const mapDispatchToProps = dispatch => {
+  return {
+    addUserToLunchGroup: (user) => dispatch(addUserToLunchGroup(user)),
+    removeUserFromLunchGroup: (user) => dispatch(removeUserFromLunchGroup(user))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LunchGroup)

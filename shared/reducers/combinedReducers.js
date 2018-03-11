@@ -4,6 +4,7 @@ import { restaurants, restaurantsHasFailed, restaurantsIsLoading,
   removeUserPreferenceHasFailed, removeUserPreferenceIsLoading,
   addUserPreferenceIsLoading, addUserPreferenceHasFailed} from './restaurants';
 import { users, usersHasFailed, usersIsLoading } from './users';
+import { lunchGroup } from './lunchGroup';
 
 const rootReducer = combineReducers({
   restaurants,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   addUserPreferenceHasFailed,
   users,
   usersHasFailed,
-  usersIsLoading
+  usersIsLoading,
+  lunchGroup
 });
 
 export default rootReducer;
