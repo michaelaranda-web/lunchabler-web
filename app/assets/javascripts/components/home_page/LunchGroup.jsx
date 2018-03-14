@@ -33,7 +33,7 @@ export class LunchGroup extends React.Component {
             onChange={(e) => this.setState({value: e.target.value})}
             onSelect={(val) => this.setState({value: val})}
             shouldItemRender={matchNameToValue}
-            inputProps={{onKeyUp: this._handleKeyPress.bind(this)}}
+            inputProps={{onKeyUp: this.addUserToLunchGroup.bind(this)}}
         />
         <div className="lunch-group-section">
           {this.renderLunchGroupList()}
@@ -44,7 +44,7 @@ export class LunchGroup extends React.Component {
 
   renderLunchGroupList() {
     return (
-      this.props.usersInLunchGroup.map((userName, i) => {
+      this.props.lunchGroup.map((userName, i) => {
         return <LunchGroupUserLabel key={i}
                                     userName={userName}
                                     onRemoveClick={this._onUserLabelRemoveClick.bind(this)} />
@@ -52,13 +52,12 @@ export class LunchGroup extends React.Component {
     )
   }
 
-  _handleKeyPress(e) {
+  addUserToLunchGroup(e) {
     if (e.key === 'Enter') {
       let isValidUser = findWithAttr(this.props.users, "name", this.state.value) !== -1;
-      let isNotAlreadyInLunchGroup = this.props.usersInLunchGroup.indexOf(this.state.value) === -1;
+      let isNotAlreadyInLunchGroup = this.props.lunchGroup.indexOf(this.state.value) === -1;
 
       if (isValidUser && isNotAlreadyInLunchGroup) {
-        this.props.onLunchGroupUpdate("add", this.state.value);
         this.props.addUserToLunchGroup(this.state.value);
         this.setState({value: ''});
       }
@@ -66,14 +65,13 @@ export class LunchGroup extends React.Component {
   }
 
   _onUserLabelRemoveClick(userName) {
-    this.props.onLunchGroupUpdate("remove", userName);
     this.props.removeUserFromLunchGroup(userName);
   }
 }
 
 function matchNameToValue(item, value) {
   return (
-      item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
   );
 }
 

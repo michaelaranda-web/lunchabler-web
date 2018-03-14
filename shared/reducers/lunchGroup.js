@@ -3,16 +3,10 @@ import { ADD_USER_TO_LUNCH_GROUP, REMOVE_USER_FROM_LUNCH_GROUP } from '../consta
 export function lunchGroup(state = [], action) {
   switch (action.type) {
     case ADD_USER_TO_LUNCH_GROUP:
-      return Object.assign({}, state, {
-        lunchGroup: [
-          ...state, action.user
-        ]
-      })
+      return [...state, action.user]
     case REMOVE_USER_FROM_LUNCH_GROUP:
-      return Object.assign({}, state, {
-        lunchGroup: state.lunchGroup.filter((user) => {
-          return action.user !== user
-        })
+      return state.filter((user) => {
+        return action.user !== user
       })
     default:
       return state;

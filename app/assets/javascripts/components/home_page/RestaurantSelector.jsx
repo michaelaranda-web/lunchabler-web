@@ -15,8 +15,7 @@ export class RestaurantSelector extends React.Component {
     //TODO: Refactor restaurantList and usersInLunchGroup into Redux state
     this.state = {
       currentRestaurant: null,
-      restaurantList: sortRestaurantsByLunchGroupPreferences(this.props.restaurants),
-      usersInLunchGroup: []
+      restaurantList: sortRestaurantsByLunchGroupPreferences(this.props.restaurants)
     };
   }
 
@@ -33,7 +32,7 @@ export class RestaurantSelector extends React.Component {
                           restaurant={restaurant}
                           rankingNumber={i+1}
                           totalRestaurants={this.state.restaurantList.length}
-                          usersInLunchGroup={this.state.usersInLunchGroup}
+                          usersInLunchGroup={[]}
                           onClick={this._updateCurrentRestaurant.bind(this)}/>
           <hr />
         </div>
@@ -55,9 +54,7 @@ export class RestaurantSelector extends React.Component {
   render() {
     return (
       <div className="restaurant-selector">
-        <LunchGroup
-            usersInLunchGroup={this.state.usersInLunchGroup}
-            onLunchGroupUpdate={this._updateUsersInLunchGroup.bind(this)} />
+        <LunchGroup />
         <div className="restaurant-list">
           {this.renderRestaurantList()}
         </div>
@@ -69,27 +66,12 @@ export class RestaurantSelector extends React.Component {
   _updateCurrentRestaurant(restaurantName) {
     this.setState({currentRestaurant: restaurantName});
   }
-
-  _updateUsersInLunchGroup(action, userName) {
-    let newGroup = this.state.usersInLunchGroup.slice();
-
-    if (action === "add") {
-      newGroup.push(userName);
-    }
-    else if (action === "remove") {
-      let index = newGroup.indexOf(userName);
-      newGroup.splice(index, 1);
-    }
-
-    this.setState({usersInLunchGroup: newGroup}, () => {
-      this.setState({restaurantList: sortRestaurantsByLunchGroupPreferences(this.props.restaurants, this.state.usersInLunchGroup)})
-    });
-  }
 }
 
 const mapStateToProps = state => {
   return {
-    restaurants : state.restaurants
+    restaurants : state.restaurants,
+    lunchGroup: state.lunchGroup
   }
 };
 
