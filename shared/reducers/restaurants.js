@@ -1,7 +1,7 @@
 import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING,
   ADD_RESTAURANT_LOADING, ADD_RESTAURANT_FAILED,
  REMOVE_USER_PREFERENCE_FAILED, REMOVE_USER_PREFERENCE_LOADING, ADD_USER_PREFERENCE_FAILED,
-ADD_USER_PREFERENCE_LOADING} from '../constants/constants';
+ADD_USER_PREFERENCE_LOADING, UPDATE_CURRENT_RESTAURANT_INDEX } from '../constants/constants';
 
 export function restaurantsIsLoading(state = false, action) {
   switch(action.type) {
@@ -79,6 +79,15 @@ export function removeUserPreferenceHasFailed(state = false, action) {
   switch(action.type) {
     case REMOVE_USER_PREFERENCE_FAILED:
       return action.hasErrored;
+    default:
+      return state;
+  }
+}
+
+export function currentRestaurantIndex(state = 0, action) {
+  switch(action.type) {
+    case UPDATE_CURRENT_RESTAURANT_INDEX:
+      return action.newIndex
     default:
       return state;
   }

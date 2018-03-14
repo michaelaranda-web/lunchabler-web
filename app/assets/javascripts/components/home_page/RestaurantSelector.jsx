@@ -71,7 +71,8 @@ export class RestaurantSelector extends React.Component {
 const mapStateToProps = state => {
   return {
     restaurants : state.restaurants,
-    lunchGroup: state.lunchGroup
+    lunchGroup: state.lunchGroup,
+    currentRestaurantIndex: state.currentRestaurantIndex
   }
 };
 

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { restaurants, restaurantsHasFailed, restaurantsIsLoading,
   addRestaurantIsLoading, addRestaurantHasFailed,
   removeUserPreferenceHasFailed, removeUserPreferenceIsLoading,
-  addUserPreferenceIsLoading, addUserPreferenceHasFailed} from './restaurants';
+  addUserPreferenceIsLoading, addUserPreferenceHasFailed, currentRestaurantIndex } from './restaurants';
 import { users, usersHasFailed, usersIsLoading } from './users';
 import { lunchGroup } from './lunchGroup';
 
@@ -19,7 +19,8 @@ const rootReducer = combineReducers({
   users,
   usersHasFailed,
   usersIsLoading,
-  lunchGroup
+  lunchGroup,
+  currentRestaurantIndex
 });
 
 export default rootReducer;

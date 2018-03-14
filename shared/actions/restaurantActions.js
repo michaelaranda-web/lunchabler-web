@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING,
 REMOVE_USER_PREFERENCE_LOADING, REMOVE_USER_PREFERENCE_FAILED, ADD_USER_PREFERENCE_LOADING,
-  ADD_USER_PREFERENCE_FAILED, ADD_RESTAURANT_LOADING, ADD_RESTAURANT_FAILED} from '../constants/constants';
+  ADD_USER_PREFERENCE_FAILED, ADD_RESTAURANT_LOADING, ADD_RESTAURANT_FAILED, UPDATE_CURRENT_RESTAURANT_INDEX} from '../constants/constants';
 
 function fetchRestaurantsSuccess(restaurants) {
   return {
@@ -127,5 +127,12 @@ export function removeUserPreferenceToRestaurant(userName, restaurantName, prefe
         })
         .then((restaurants) => dispatch(fetchRestaurantsData()))
         .catch((e) => {console.log(e); dispatch(removeUserPreferenceFail(true))});
+  };
+}
+
+function updateCurrentRestaurantIndex(newIndex) {
+  return {
+    type: UPDATE_CURRENT_RESTAURANT_INDEX,
+    newIndex: newIndex
   };
 }
