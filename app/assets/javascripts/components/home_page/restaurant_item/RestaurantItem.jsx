@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateCurrentRestaurantIndex } from '../../../../../../shared/actions/restaurantActions';
+import { findWithAttr } from '../../../../../../helpers/arrayHelper';
 
 export class RestaurantItem extends React.Component {
   render() {
     return (
-      <div className="restaurant-item" onClick={this._onClick.bind(this)}>
+      <div className="restaurant-item" onClick={this.updateCurrentRestaurant.bind(this)}>
         <div className="restaurant-details">
           <h4>{this.props.restaurant.name}</h4>
           <span>{this.props.rankingNumber} of {this.props.totalRestaurants}</span>
@@ -48,7 +51,25 @@ export class RestaurantItem extends React.Component {
     return mehCount;
   }
 
-  _onClick() {
-    this.props.onClick(this.props.restaurant.name);
+  updateCurrentRestaurant() {
+    let indexOfCurrentRestaurant = this.props.restaurant ?
+        findWithAttr(this.props.restaurants, "name", this.props.restaurant.name)
+        : 0;
+    
+    this.props.updateCurrentRestaurantIndex(indexOfCurrentRestaurant);
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    restaurants : state.restaurants
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateCurrentRestaurantIndex: (index) => dispatch(updateCurrentRestaurantIndex(index))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantItem)

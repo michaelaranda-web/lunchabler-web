@@ -130,7 +130,7 @@ export function removeUserPreferenceToRestaurant(userName, restaurantName, prefe
   };
 }
 
-function updateCurrentRestaurantIndex(newIndex) {
+export function updateCurrentRestaurantIndex(newIndex) {
   return {
     type: UPDATE_CURRENT_RESTAURANT_INDEX,
     newIndex: newIndex
