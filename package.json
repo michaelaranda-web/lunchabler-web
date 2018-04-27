@@ -11,7 +11,7 @@
     "seed-restaurants": "mongoimport --db lunchabler --collection restaurants --drop --file ~/workspace/db/seeds/restaurants.json --jsonArray",
     "seed-users": "mongoimport --db lunchabler --collection users --drop --file ~/workspace/db/seeds/users.json --jsonArray",
     "start": "babel-node ./bin/www",
-    "test": "mocha -u bdd-lazy-var/global"
+    "test": "mocha --compilers js:babel-core/register -u bdd-lazy-var/global"
   },
   "dependencies": {
     "axios": "^0.16.2",
