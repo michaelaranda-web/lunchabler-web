@@ -10,7 +10,8 @@
     "heroku-postbuild": "npm run build",
     "seed-restaurants": "mongoimport --db lunchabler --collection restaurants --drop --file ~/workspace/db/seeds/restaurants.json --jsonArray",
     "seed-users": "mongoimport --db lunchabler --collection users --drop --file ~/workspace/db/seeds/users.json --jsonArray",
-    "start": "babel-node ./bin/www"
+    "start": "babel-node ./bin/www",
+    "test": "mocha -u bdd-lazy-var/global"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -51,6 +52,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
+    "bdd-lazy-var": "^2.2.3",
+    "mocha": "^5.1.1",
     "nodemon": "^1.11.0",
     "webpack-dev-server": "^2.4.5"
   }
