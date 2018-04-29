@@ -1,3 +1,5 @@
+import { findWithAttr } from './arrayHelper'
+
 export function sortRestaurantsByLunchGroupPreferences(restaurants, usersInLunchGroup) {
   if (!usersInLunchGroup || usersInLunchGroup.length === 0) {
     return restaurants.sort(compareRestaurantsByPreferences);
@@ -31,7 +33,7 @@ function _getRestaurantsWithGroupPreferencesOnly(restaurants, usersInLunchGroup)
 
     [restaurant.mehs, restaurant.nos].map((prefArray, i) => {
       for (let pref of prefArray) {
-        if (usersInLunchGroup.indexOf(pref.name) !== -1) {
+        if (findWithAttr(usersInLunchGroup, "name", pref.name) !== -1) {
           preferences[i].push(pref.name);
         }
       }
