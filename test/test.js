@@ -1,37 +1,38 @@
 var assert = require('assert');
-
 import { sortRestaurantsByLunchGroupPreferences } from "../helpers/restaurantHelper";
+import { userFixture, restaurantFixture } from "./fixtures/fixtures";
 
-function restaurantFixture(name, mehs, nos) {
-  return [
-    { 
-      "name": name || "Test Restaurant", 
-      "mehs": mehs || [], 
-      "nos": nos || []
-    }
-  ]
+function getOrderString(restaurants) {
+  return restaurants.map((restaurant) => {
+    return restaurant.name
+  }).join();
 }
 
-function userFixture(name) {
-  var username = name || "Test User";
-  
-  return {"name": username}
-}
-
-var user = userFixture();
+const Michael = userFixture("Michael");
+const Morgan = userFixture("Morgan");
+const Mike = userFixture("Mike");
 
 describe('#sortRestaurantsByLunchGroupPreferences', function() {
-  def('restaurants', function() { 
+  def('usersInLunchGroup', function() { 
     return [
-      restaurantFixture("A"),
-      restaurantFixture("B"),
-      restaurantFixture("C")
+      Michael,
+      Morgan,
+      Mike
     ] 
   });
   
   describe('only one restaurant has a meh preference', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal($restaurants.length, 3);
+    def('restaurants', function() { 
+      return [
+        restaurantFixture("A", [Michael]),
+        restaurantFixture("B"),
+        restaurantFixture("C")
+      ] 
+    });
+  
+    it('sorts the meh restaurant as the last result', function() {
+      var sortedRestaurants = sortRestaurantsByLunchGroupPreferences($restaurants, $usersInLunchGroup);
+      assert.equal(getOrderString(sortedRestaurants), "B,C,A");
     });
   });
 });
