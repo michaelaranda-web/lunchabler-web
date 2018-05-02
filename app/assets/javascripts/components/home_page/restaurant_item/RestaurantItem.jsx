@@ -52,11 +52,7 @@ export class RestaurantItem extends React.Component {
   }
 
   updateCurrentRestaurant() {
-    let indexOfCurrentRestaurant = this.props.restaurant ?
-        findWithAttr(this.props.restaurants, "name", this.props.restaurant.name)
-        : 0;
-    
-    this.props.updateCurrentRestaurantIndex(indexOfCurrentRestaurant);
+    this.props.updateCurrentRestaurantIndex(this.props.id);
   }
 }
 

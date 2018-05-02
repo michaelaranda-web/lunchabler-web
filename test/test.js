@@ -1,6 +1,6 @@
 var assert = require('assert');
 import { sortRestaurantsByLunchGroupPreferences } from "../helpers/restaurantHelper";
-import { restaurantFixture } from "./fixtures/fixtures";
+import { userFixture, restaurantFixture } from "./fixtures/fixtures";
 
 function getOrderString(restaurants) {
   return restaurants.map((restaurant) => {
@@ -15,6 +15,10 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
     sortedRestaurants = sortRestaurantsByLunchGroupPreferences($restaurants, $usersInLunchGroup);
   });
   
+  const Michael = userFixture("Michael");
+  const Morgan = userFixture("Morgan");
+  const Mike = userFixture("Mike");
+  
   def('usersInLunchGroup', function() { 
     return [
       "Michael",
@@ -26,7 +30,7 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
   describe('only one restaurant has a meh preference', function() {
     def('restaurants', function() { 
       return [
-        restaurantFixture("A", ["Michael"]),
+        restaurantFixture("A", [Michael]),
         restaurantFixture("B"),
         restaurantFixture("C")
       ] 
@@ -40,7 +44,7 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
   describe('only one restaurant has a no preference', function() {
     def('restaurants', function() { 
       return [
-        restaurantFixture("A", null, ["Michael"]),
+        restaurantFixture("A", null, [Michael]),
         restaurantFixture("B"),
         restaurantFixture("C")
       ] 
@@ -55,8 +59,8 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
     describe("users are unique across preferences", function() {
       def('restaurants', function() { 
         return [
-          restaurantFixture("A", ["Michael"]),
-          restaurantFixture("B", ["Morgan", "Mike"]),
+          restaurantFixture("A", [Michael]),
+          restaurantFixture("B", [Morgan, Mike]),
           restaurantFixture("C")
         ] 
       });
@@ -69,8 +73,8 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
     describe("user is not unique across preferences", function() {
       def('restaurants', function() { 
         return [
-          restaurantFixture("A", ["Michael"]),
-          restaurantFixture("B", ["Michael", "Mike"]),
+          restaurantFixture("A", [Michael]),
+          restaurantFixture("B", [Michael, Mike]),
           restaurantFixture("C")
         ] 
       });
@@ -85,8 +89,8 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
     describe("users are unique across preferences", function() {
       def('restaurants', function() { 
         return [
-          restaurantFixture("A", null, ["Michael"]),
-          restaurantFixture("B", null, ["Morgan", "Mike"]),
+          restaurantFixture("A", null, [Michael]),
+          restaurantFixture("B", null, [Morgan, Mike]),
           restaurantFixture("C")
         ] 
       });
@@ -99,8 +103,8 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
     describe("user is not unique across preferences", function() {
       def('restaurants', function() { 
         return [
-          restaurantFixture("A", null, ["Michael"]),
-          restaurantFixture("B", null, ["Michael", "Mike"]),
+          restaurantFixture("A", null, [Michael]),
+          restaurantFixture("B", null, [Michael, Mike]),
           restaurantFixture("C")
         ] 
       });
@@ -114,8 +118,8 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
   describe('one restaurant has a meh, one restaurant has a no, one has no preferences', function() {
     def('restaurants', function() { 
       return [
-        restaurantFixture("A", ["Michael"]),
-        restaurantFixture("B", null, ["Mike"]),
+        restaurantFixture("A", [Michael]),
+        restaurantFixture("B", null, [Mike]),
         restaurantFixture("C")
       ] 
     });

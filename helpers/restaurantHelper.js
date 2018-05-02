@@ -30,11 +30,10 @@ function _getRestaurantsWithGroupPreferencesOnly(restaurants, usersInLunchGroup)
 
   for (let restaurant of restaurants) {
     let preferences = [[],[]];
-    console.log(restaurant);
 
     [restaurant.mehs, restaurant.nos].map((prefArray, i) => {
       for (let pref of prefArray) {
-        if (usersInLunchGroup.indexOf(pref) !== -1) {
+        if (usersInLunchGroup.indexOf(pref.name) !== -1) {
           preferences[i].push(pref);
         }
       }
