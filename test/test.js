@@ -54,11 +54,11 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
   describe('one restaurant has mehs, but another restaurant has more', function() {
     describe("users are unique across preferences", function() {
       def('restaurants', function() { 
-      return [
-        restaurantFixture("A", ["Michael"]),
-        restaurantFixture("B", ["Morgan", "Mike"]),
-        restaurantFixture("C")
-      ] 
+        return [
+          restaurantFixture("A", ["Michael"]),
+          restaurantFixture("B", ["Morgan", "Mike"]),
+          restaurantFixture("C")
+        ] 
       });
     
       it('sorts the restaurant with fewer mehs above the other', function() {
@@ -68,11 +68,11 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
     
     describe("user is not unique across preferences", function() {
       def('restaurants', function() { 
-      return [
-        restaurantFixture("A", ["Michael"]),
-        restaurantFixture("B", ["Michael", "Mike"]),
-        restaurantFixture("C")
-      ] 
+        return [
+          restaurantFixture("A", ["Michael"]),
+          restaurantFixture("B", ["Michael", "Mike"]),
+          restaurantFixture("C")
+        ] 
       });
     
       it('sorts the restaurant with fewer mehs above the other', function() {
@@ -84,11 +84,11 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
   describe('one restaurant has nos, but another restaurant has more', function() {
     describe("users are unique across preferences", function() {
       def('restaurants', function() { 
-      return [
-        restaurantFixture("A", null, ["Michael"]),
-        restaurantFixture("B", null, ["Morgan", "Mike"]),
-        restaurantFixture("C")
-      ] 
+        return [
+          restaurantFixture("A", null, ["Michael"]),
+          restaurantFixture("B", null, ["Morgan", "Mike"]),
+          restaurantFixture("C")
+        ] 
       });
     
       it('sorts the restaurant with fewer nos above the other', function() {
@@ -98,11 +98,11 @@ describe('#sortRestaurantsByLunchGroupPreferences', function() {
     
     describe("user is not unique across preferences", function() {
       def('restaurants', function() { 
-      return [
-        restaurantFixture("A", null, ["Michael"]),
-        restaurantFixture("B", null, ["Michael", "Mike"]),
-        restaurantFixture("C")
-      ] 
+        return [
+          restaurantFixture("A", null, ["Michael"]),
+          restaurantFixture("B", null, ["Michael", "Mike"]),
+          restaurantFixture("C")
+        ] 
       });
     
       it('sorts the restaurant with fewer nos above the other', function() {
