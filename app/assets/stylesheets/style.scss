@@ -187,3 +187,20 @@ hr {
     cursor: pointer;
   }
 }
+
+#control-page {
+  .username {
+    display: inline-block;
+    width: 150px;
+  }  
+  
+  .restaurant {
+    display: inline-block;
+    width: 250px;
+  }  
+  
+  .delete-button {
+    color: red;
+    display: inline-block;
+  }
+}

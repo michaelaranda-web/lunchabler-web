@@ -1,7 +1,8 @@
 import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING,
   ADD_RESTAURANT_LOADING, ADD_RESTAURANT_FAILED,
  REMOVE_USER_PREFERENCE_FAILED, REMOVE_USER_PREFERENCE_LOADING, ADD_USER_PREFERENCE_FAILED,
-ADD_USER_PREFERENCE_LOADING, UPDATE_CURRENT_RESTAURANT_INDEX } from '../constants/constants';
+ADD_USER_PREFERENCE_LOADING, UPDATE_CURRENT_RESTAURANT_INDEX,
+REMOVE_RESTAURANT_FAILED, REMOVE_RESTAURANT_LOADING} from '../constants/constants';
 
 export function restaurantsIsLoading(state = false, action) {
   switch(action.type) {
@@ -42,6 +43,24 @@ export function addRestaurantIsLoading(state = false, action) {
 export function addRestaurantHasFailed(state = false, action) {
   switch(action.type) {
     case ADD_RESTAURANT_FAILED:
+      return action.hasErrored;
+    default:
+      return state;
+  }
+}
+
+export function removeRestaurantIsLoading(state = false, action) {
+  switch(action.type) {
+    case REMOVE_RESTAURANT_LOADING:
+      return action.isLoading;
+    default:
+      return state;
+  }
+}
+
+export function removeRestaurantHasFailed(state = false, action) {
+  switch(action.type) {
+    case REMOVE_RESTAURANT_FAILED:
       return action.hasErrored;
     default:
       return state;

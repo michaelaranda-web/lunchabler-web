@@ -15,13 +15,6 @@ export class AddRestaurantForm extends React.Component {
     this.submitAddRestaurant = this.submitAddRestaurant.bind(this);
   }
 
-  getValidationState() {
-    if (this.state.value.length === 0) {
-      return 'error';
-    }
-    return 'success';
-  }
-
   handleChange(e) {
     this.setState({ value: e.target.value });
   }
@@ -29,6 +22,7 @@ export class AddRestaurantForm extends React.Component {
   submitAddRestaurant(e) {
     e.preventDefault();
     this.props.addRestaurant(this.state.value);
+    this.setState({ value: '' });
   }
 
   render() {
@@ -39,7 +33,6 @@ export class AddRestaurantForm extends React.Component {
         <form onSubmit={this.submitAddRestaurant}>
           <FormGroup
               controlId="formBasicText"
-              validationState={this.getValidationState()}
           >
             <ControlLabel>Name</ControlLabel>
             <FormControl

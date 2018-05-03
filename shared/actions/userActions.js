@@ -42,3 +42,11 @@ export function addUser(userName) {
         .catch((e) => {console.log(e)});
   };
 }
+
+export function removeUser(userName) {
+  return (dispatch) => {
+    axios.post('/api/remove_user', {name: userName})
+        .then(() => dispatch(fetchUsersData()))
+        .catch((e) => {console.log(e)});
+  };
+}

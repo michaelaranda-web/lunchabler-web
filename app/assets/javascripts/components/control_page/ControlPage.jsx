@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUsersData } from '../../../../../shared/actions/userActions';
-import { fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
+import { removeUser, fetchUsersData } from '../../../../../shared/actions/userActions';
+import { removeRestaurant, fetchRestaurantsData } from '../../../../../shared/actions/restaurantActions';
 import AddUserForm from './AddUserForm.jsx';
 import AddRestaurantForm from './AddRestaurantForm.jsx';
 
@@ -14,7 +14,13 @@ export class ControlPage extends React.Component {
   renderRestaurantList() {
     return (
       this.props.restaurants.map((restaurant, i) => {
-        return <div key={i}>{`${i+1}: ${restaurant.name}`}</div>;
+        return (
+            <div key={i}>
+              <div className="restaurant">{`${i+1}: ${restaurant.name}`}</div>
+              <div className="delete-button glyphicon glyphicon-remove"
+                   onClick={() => { this.props.removeRestaurant(restaurant.name) }}></div>
+            </div>
+          );
       })
     );
   }
@@ -22,7 +28,13 @@ export class ControlPage extends React.Component {
   renderUserList() {
     return (
         this.props.users.map((user, i) => {
-          return <div key={i}>{`${i+1}: ${user.name}`}</div>;
+          return (
+            <div key={i}>
+              <div className="username">{`${i+1}: ${user.name}`}</div>
+              <div className="delete-button glyphicon glyphicon-remove"
+                   onClick={() => { this.props.removeUser(user.name) }}></div>
+            </div>
+          );
         })
     );
   }
@@ -31,10 +43,8 @@ export class ControlPage extends React.Component {
     return (
       <div id="control-page">
         <AddUserForm />
-        <h3>Registered Users</h3>
         {this.renderUserList()}
         <AddRestaurantForm />
-        <h3>List of Restaurants</h3>
         <div className="restaurants-list">
           {this.renderRestaurantList()}
         </div>
@@ -52,6 +62,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    removeUser: (user) => dispatch(removeUser(user)),
+    removeRestaurant: (restaurant) => dispatch(removeRestaurant(restaurant)),
     fetchUsers: () => dispatch(fetchUsersData()),
     fetchRestaurantsData: () => dispatch(fetchRestaurantsData())
   };

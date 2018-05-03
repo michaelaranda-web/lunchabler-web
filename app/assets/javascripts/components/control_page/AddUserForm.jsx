@@ -15,13 +15,6 @@ export class AddUserForm extends React.Component {
     this.submitAddUser = this.submitAddUser.bind(this);
   }
 
-  getValidationState() {
-    if (this.state.value.length === 0) {
-      return 'error';
-    }
-    return 'success';
-  }
-
   handleChange(e) {
     this.setState({ value: e.target.value });
   }
@@ -29,6 +22,7 @@ export class AddUserForm extends React.Component {
   submitAddUser(e) {
     e.preventDefault();
     this.props.addUser(this.state.value);
+    this.setState({ value: '' })
   }
 
   render() {
@@ -39,7 +33,6 @@ export class AddUserForm extends React.Component {
         <form onSubmit={this.submitAddUser}>
           <FormGroup
               controlId="formBasicText"
-              validationState={this.getValidationState()}
           >
             <ControlLabel>Name</ControlLabel>
             <FormControl

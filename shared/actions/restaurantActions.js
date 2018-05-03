@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { FETCH_RESTAURANTS_SUCCESS, FETCH_RESTAURANTS_FAILED, FETCH_RESTAURANTS_LOADING,
 REMOVE_USER_PREFERENCE_LOADING, REMOVE_USER_PREFERENCE_FAILED, ADD_USER_PREFERENCE_LOADING,
-  ADD_USER_PREFERENCE_FAILED, ADD_RESTAURANT_LOADING, ADD_RESTAURANT_FAILED, UPDATE_CURRENT_RESTAURANT_INDEX} from '../constants/constants';
+  ADD_USER_PREFERENCE_FAILED, ADD_RESTAURANT_LOADING, ADD_RESTAURANT_FAILED, UPDATE_CURRENT_RESTAURANT_INDEX,
+  REMOVE_RESTAURANT_FAILED, REMOVE_RESTAURANT_LOADING
+} from '../constants/constants';
 
 function fetchRestaurantsSuccess(restaurants) {
   return {
@@ -34,6 +36,20 @@ function addRestaurantFail(bool) {
 function addRestaurantInProgress(bool) {
   return {
     type: ADD_RESTAURANT_LOADING,
+    isLoading: bool
+  };
+}
+
+function removeRestaurantFail(bool) {
+  return {
+    type: REMOVE_RESTAURANT_FAILED,
+    hasErrored: bool
+  };
+}
+
+function removeRestaurantInProgress(bool) {
+  return {
+    type: REMOVE_RESTAURANT_LOADING,
     isLoading: bool
   };
 }
@@ -89,6 +105,19 @@ export function addRestaurant(restaurantName) {
         })
         .then((restaurants) => dispatch(fetchRestaurantsData()))
         .catch((e) => {console.log(e); dispatch(addRestaurantFail(true))});
+  };
+}
+
+export function removeRestaurant(restaurantName) {
+  return (dispatch) => {
+    dispatch(removeRestaurantInProgress(true));
+    axios.post('/api/remove_restaurant', {restaurant: restaurantName})
+        .then((response) => {
+          dispatch(removeRestaurantInProgress(false));
+          return response.data.restaurants;
+        })
+        .then((restaurants) => dispatch(fetchRestaurantsData()))
+        .catch((e) => {console.log(e); dispatch(removeRestaurantFail(true))});
   };
 }
 

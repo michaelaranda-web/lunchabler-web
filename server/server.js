@@ -57,6 +57,20 @@ app.post('/api/add_user', (req, res) => {
   });
 });
 
+app.post('/api/remove_user', (req, res) => {
+  let user = {
+    name: req.body.name
+  };
+
+  db.collection('users').remove(user, (err) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log("[Server] Removed Name: " + req.body.name);
+    res.send(req.body);
+  });
+});
+
 app.post('/api/add_restaurant', (req, res) => {
   let restaurant = {
     name: req.body.restaurant,
@@ -69,6 +83,20 @@ app.post('/api/add_restaurant', (req, res) => {
       console.log(err);
     }
     console.log("[Server] Added Restaurant: " + req.body.restaurant);
+    res.send(req.body);
+  });
+});
+
+app.post('/api/remove_restaurant', (req, res) => {
+  let restaurant = {
+    name: req.body.restaurant
+  };
+
+  db.collection('restaurants').remove(restaurant, (err) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log("[Server] Removed Restaurant: " + req.body.restaurant);
     res.send(req.body);
   });
 });
