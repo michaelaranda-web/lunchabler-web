@@ -151,8 +151,23 @@ hr {
       .general-tab-content {
         padding: 15px 0;
         
-        .comments-header {
-          margin: 0 0 15px;
+        .header-section {
+          position: relative;
+          
+          .comments-header {
+            margin: 0 0 15px;
+          }
+          
+          .add-comment-button, .return-button {
+            position: absolute;
+            right: 0;
+            font-size: 16px;
+            
+            &:hover {
+              cursor: pointer;
+              color: darkgrey;
+            }
+          }
         }
         
         .comment {
