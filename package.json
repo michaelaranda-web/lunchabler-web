@@ -8,6 +8,7 @@
     "clean": "rm -rf build && mkdir build && rm -rf dist && mkdir dist",
     "dev": "nodemon ./bin/www --exec babel-node",
     "heroku-postbuild": "npm run build",
+    "mongod": "mongod --dbpath /data/db --repair && ~/mongod",
     "seed-restaurants": "mongoimport --db lunchabler --collection restaurants --drop --file ~/workspace/db/seeds/restaurants.json --jsonArray",
     "seed-users": "mongoimport --db lunchabler --collection users --drop --file ~/workspace/db/seeds/users.json --jsonArray",
     "start": "babel-node ./bin/www",
