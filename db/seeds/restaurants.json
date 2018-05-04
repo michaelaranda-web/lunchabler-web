@@ -28,5 +28,15 @@
 {"name":"Akai Hana", "mehs": [], "nos": []},
 {"name":"Fish District", "mehs": [], "nos": []},
 {"name":"Costco", "mehs": [], "nos": []},
-{"name":"McDonalds", "mehs": [], "nos": []}
+{"name":"McDonalds", 
+  "mehs": [], 
+  "nos": [], 
+  "comments":
+    [
+      {"username": "Michael", "content": "Doesn't seem like anyone likes McDonalds. I understand."},
+      {"username": "Chewie", "content": "Why is McDonald's even on this list?"},
+      {"username": "Derek", "content": "What are the McNuggets even made of?"},
+      {"username": "Morgan", "content": "I just wanted to add a comment."},
+      {"username": "Tales", "content": "Very quick and convenient. Five stars."}
+    ]}
 ]

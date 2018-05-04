@@ -148,7 +148,23 @@ hr {
     #restaurant-item-tabs {
       margin-top: 15px;
 
+      .general-tab-content {
+        padding: 15px 0;
+        
+        .comments-header {
+          margin: 0 0 15px;
+        }
+        
+        .comment {
+          .username {
+            font-weight: bold;
+          }
+        }
+      }
+      
       .preferences-tab-content {
+        padding: 15px 0;
+        
         .restaurant-filter-label {
           .filter-name {
             border-radius: 20px 0 0 20px;
@@ -166,7 +182,11 @@ hr {
 .meh-list, .no-list {
   display: inline-block;
   vertical-align: top;
-  margin: 0 20px;
+  margin: 0 15px 0 0;
+  
+  h4 {
+    margin: 0;
+  }
 }
 
 .user-list {
