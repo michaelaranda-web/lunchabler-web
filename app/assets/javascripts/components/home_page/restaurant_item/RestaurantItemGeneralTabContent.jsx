@@ -48,7 +48,12 @@ export class RestaurantItemGeneralTabContent extends React.Component {
   renderAddCommentSection() {
     return (
       <div className="add-comment-section">
-        Add Comment Section
+        <p>Whatchu got to say?</p>
+        <textarea></textarea>
+        <div className="buttons-row">
+          <button type="button" className="btn btn-primary">Save</button>
+          <button type="button" className="btn btn-secondary">Cancel</button>
+        </div>
       </div>
     );
   }
