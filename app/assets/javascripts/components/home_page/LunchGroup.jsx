@@ -17,7 +17,7 @@ export class LunchGroup extends React.Component {
   render() {
     return (
       <div className="lunch-group">
-        <h4 className="header">
+        <h4 className="header-message">
           Let's eat! Add some names to find out the best restaurant choices for the group.
         </h4>
         <Autocomplete

@@ -10,7 +10,7 @@ export class LunchGroupV2 extends React.Component {
   render() {
     return (
       <div className="lunch-group">
-        <h4 className="header">
+        <h4 className="header-message">
           Let's eat! Specify today's lunch group to determine the most optimal restaurant choices.
         </h4>
         <div className="lunch-group-section">

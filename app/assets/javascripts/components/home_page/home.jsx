@@ -15,8 +15,12 @@ export class Home extends React.Component {
   render() {
     return (
         <div id="home-page">
-          <h1>Lunchabler</h1>
-          <Link to="control">Link to Control Page</Link>
+          <div className="header">
+            <h1>Lunchabler</h1>
+            <Link to="control">
+              <div className="control-page-icon glyphicon glyphicon-cog"></div>
+            </Link>
+          </div>
 
           <RestaurantSelector 
               orderedRestaurantList={sortRestaurantsByLunchGroupPreferences(this.props.restaurants, this.props.lunchGroup)}
