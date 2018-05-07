@@ -3,7 +3,8 @@ import { restaurants, restaurantsHasFailed, restaurantsIsLoading,
   addRestaurantIsLoading, addRestaurantHasFailed,
   removeUserPreferenceHasFailed, removeUserPreferenceIsLoading,
   addUserPreferenceIsLoading, addUserPreferenceHasFailed, currentRestaurantIndex,
-  removeRestaurantIsLoading, removeRestaurantHasFailed } from './restaurants';
+  removeRestaurantIsLoading, removeRestaurantHasFailed,
+  addCommentToRestaurantIsLoading, addCommentToRestaurantHasFailed} from './restaurants';
 import { users, usersHasFailed, usersIsLoading } from './users';
 import { lunchGroup } from './lunchGroup';
 
@@ -23,7 +24,9 @@ const rootReducer = combineReducers({
   usersHasFailed,
   usersIsLoading,
   lunchGroup,
-  currentRestaurantIndex
+  currentRestaurantIndex,
+  addCommentToRestaurantIsLoading,
+  addCommentToRestaurantHasFailed
 });
 
 export default rootReducer;

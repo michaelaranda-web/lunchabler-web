@@ -3,6 +3,11 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+#lunchabler-app {
+  max-width: 1200px;
+  margin: auto;
+}
+
 a {
   color: #00B7FF;
 }
@@ -171,12 +176,22 @@ hr {
         }
         
         .comment {
+          margin-left: 20px;
+          
           .username {
             font-weight: bold;
+          }
+          
+          .content {
+            font-size: 12px;
           }
         }
         
         .add-comment-section {
+          p {
+            margin: 10px 0;
+          }
+          
           textarea {
             width: 100%;
             height: 125px;

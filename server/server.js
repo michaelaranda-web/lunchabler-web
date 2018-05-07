@@ -5,6 +5,9 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import monk from 'monk';
+import validator from 'express-validator';
+import {body, validationResult} from 'express-validator/check';
+import {sanitize} from 'express-validator/filter';
 
 import { matchPath } from 'react-router';
 import React from 'react';
@@ -28,6 +31,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(validator());
 
 app.get("/api/users", (req, res) => {
   db.get("users").find().then((users) => {
@@ -133,6 +137,28 @@ app.patch('/api/remove_preference', (req, res) => {
   } catch (e) {
     console.log(e);
   }
+});
+
+app.patch('/api/add_comment', (req, res) => {
+  let sanitizedRestaurantName = req.sanitize('restaurant').trim();
+  let sanitizedComment = req.sanitize('comment').trim();
+  let sanitizedUsername = req.sanitize('username').trim();
+  
+  let restaurant = {name: sanitizedRestaurantName};
+  let newComment = {username: sanitizedUsername, content: sanitizedComment};
+
+  try {
+    db.collection('restaurants').update(
+      {name: sanitizedRestaurantName},
+      {$push: {comments: newComment}}
+    ).then(() => {
+      console.log("[Server] Added Restaurant Comment for", sanitizedRestaurantName);
+      res.send(req.body);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  res.send(req.body);
 });
 
 const routes = [
