@@ -12,17 +12,15 @@ export class RestaurantItemGeneralTabContent extends React.Component {
   }
   
   renderContent() {
-    if (this.props.restaurant.comments) {
-      return (
-        <div className="comments-section">
-          <div className="header-section">
-            <h4 className="comments-header">Comments</h4>
-            {this.renderHeaderIcon()}
-          </div>
-          {this.renderSection()}
+    return (
+      <div className="comments-section">
+        <div className="header-section">
+          <h4 className="comments-header">Comments</h4>
+          {this.renderHeaderIcon()}
         </div>
-      );
-    } 
+        {this.renderSection()}
+      </div>
+    );
   }
   
   renderSection() {
@@ -34,16 +32,18 @@ export class RestaurantItemGeneralTabContent extends React.Component {
   }
   
   renderCommentsList() {
-    return (
-      this.props.restaurant.comments.map((comment, i) => {
-        return (
-          <div key={i}>
-            <UserComment comment={comment} />
-            <hr />
-          </div>
-        )
-      })
-    );
+    if(this.props.restaurant.comments) {
+      return (
+        this.props.restaurant.comments.map((comment, i) => {
+          return (
+            <div key={i}>
+              <UserComment comment={comment} />
+              <hr />
+            </div>
+          )
+        })
+      );
+    }
   }
   
   renderAddCommentSection() {
